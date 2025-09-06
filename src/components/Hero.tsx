@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import './Hero.scss'
 
@@ -25,6 +26,15 @@ const Hero: React.FC = () => {
 
   return (
     <header id="home" className="hero" role="banner">
+      <div className="hero-background">
+        <Image
+          src="/goldenGateBridge.jpg"
+          alt="Golden Gate Bridge background"
+          fill
+          priority
+          style={{ objectFit: 'cover' }}
+        />
+      </div>
       <div className="hero-container">
         <motion.div 
           className="hero-content"
@@ -92,10 +102,13 @@ const Hero: React.FC = () => {
         
         <div className="hero-image">
           <div className="hero-image-container">
-            <img 
+            <Image 
               src="/caroline-headshot.jpg" 
               alt="Caroline Sarkki - Full Stack Software Engineer"
+              width={300}
+              height={300}
               className="hero-photo"
+              priority
             />
           </div>
         </div>
