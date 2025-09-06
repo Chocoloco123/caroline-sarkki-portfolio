@@ -87,18 +87,18 @@ const Projects: React.FC = () => {
       viewport={{ once: true }}
       whileHover={{ y: -10 }}
     >
-      <Card className="project-card h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/10 backdrop-blur-sm">
-        <CardHeader className="text-center">
-          <div className="project-image mx-auto mb-4" aria-hidden="true">
+      <Card className="project-card h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/10 backdrop-blur-sm p-2">
+        <CardHeader className="text-center px-8 pb-4">
+          <div className="project-image mx-auto mb-6" aria-hidden="true">
             <i className={project.icon}></i>
           </div>
           <CardTitle className="text-xl font-bold text-white">{project.title}</CardTitle>
         </CardHeader>
-        <CardContent className="text-center">
-          <CardDescription className="text-white/80 mb-4 leading-relaxed">
+        <CardContent className="text-center px-8 pt-0">
+          <CardDescription className="text-white/80 mb-6 leading-relaxed">
             {project.description}
           </CardDescription>
-          <div className="project-tech flex flex-wrap justify-center gap-2 mb-4" role="list" aria-label="Technologies used">
+          <div className="project-tech flex flex-wrap justify-center gap-2 mb-6" role="list" aria-label="Technologies used">
             {project.technologies.map((tech) => (
               <Badge 
                 key={tech} 
