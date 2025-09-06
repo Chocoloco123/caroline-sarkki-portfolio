@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import './Hero.scss'
 
@@ -26,15 +25,6 @@ const Hero: React.FC = () => {
 
   return (
     <header id="home" className="hero" role="banner">
-      <div className="hero-background">
-        <Image
-          src="/goldenGateBridge.jpg"
-          alt="Golden Gate Bridge background"
-          fill
-          priority
-          style={{ objectFit: 'cover' }}
-        />
-      </div>
       <div className="hero-container">
         <motion.div 
           className="hero-content"
@@ -102,13 +92,26 @@ const Hero: React.FC = () => {
         
         <div className="hero-image">
           <div className="hero-image-container">
-            <Image 
+            <img 
               src="/caroline-headshot.jpg" 
               alt="Caroline Sarkki - Full Stack Software Engineer"
-              width={300}
-              height={300}
               className="hero-photo"
-              priority
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                console.error('Headshot failed to load:', target.src);
+                // Try alternative paths
+                if (target.src.includes('/caroline-headshot.jpg')) {
+                  target.src = './caroline-headshot.jpg';
+                } else if (target.src.includes('./caroline-headshot.jpg')) {
+                  target.src = 'caroline-headshot.jpg';
+                } else {
+                  // Show placeholder if all attempts fail
+                  target.style.display = 'none';
+                  if (target.parentElement) {
+                    target.parentElement.innerHTML = '<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f59e0b, #f97316); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Photo</div>';
+                  }
+                }
+              }}
             />
           </div>
         </div>
