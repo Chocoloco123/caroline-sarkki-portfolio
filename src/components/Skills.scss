@@ -1,0 +1,46 @@
+@use '../styles/variables.scss' as *;
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: $spacing-2xl;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skill-category {
+  h3 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-xl;
+    text-align: center;
+  }
+}
+
+.skill-item {
+  margin-bottom: $spacing-lg;
+}
+
+.skill-name {
+  display: block;
+  font-weight: $font-weight-medium;
+  color: $text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+.skill-bar {
+  height: 8px;
+  background: $border-light;
+  border-radius: $radius-sm;
+  overflow: hidden;
+}
+
+.skill-progress {
+  height: 100%;
+  background: $gradient-accent;
+  border-radius: $radius-sm;
+  transition: width 1s ease;
+}

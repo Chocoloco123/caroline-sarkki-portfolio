@@ -1,0 +1,112 @@
+@use '../styles/variables.scss' as *;
+
+.contact {
+  background-color: $bg-secondary;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-3xl;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+  }
+}
+
+.contact-info {
+  h3 {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    color: $text-muted;
+    margin-bottom: $spacing-xl;
+    line-height: 1.6;
+  }
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  color: $text-secondary;
+
+  i {
+    width: 20px;
+    color: $primary-amber;
+  }
+
+  a {
+    color: $primary-amber;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.contact-form {
+  background: white;
+  padding: $spacing-xl;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-md;
+}
+
+.form-group {
+  margin-bottom: $spacing-lg;
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid $border-light;
+    border-radius: $radius-lg;
+    font-size: $font-size-base;
+    transition: border-color $transition-normal;
+    font-family: inherit;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-amber;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+.notification {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  padding: $spacing-md $spacing-lg;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  z-index: $z-modal;
+  max-width: 400px;
+  font-weight: $font-weight-medium;
+
+  &-success {
+    background: #10b981;
+    color: white;
+  }
+
+  &-error {
+    background: #ef4444;
+    color: white;
+  }
+}

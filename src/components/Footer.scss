@@ -1,0 +1,45 @@
+@use '../styles/variables.scss' as *;
+
+.footer {
+  background-color: $bg-dark;
+  color: white;
+  padding: $spacing-xl 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    gap: $spacing-md;
+    text-align: center;
+  }
+}
+
+.footer-social {
+  display: flex;
+  gap: $spacing-md;
+
+  a {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: $radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all $transition-normal;
+
+    &:hover {
+      background-color: $primary-amber;
+    }
+
+    i {
+      font-size: $font-size-base;
+    }
+  }
+}

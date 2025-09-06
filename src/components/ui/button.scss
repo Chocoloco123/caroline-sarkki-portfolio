@@ -1,0 +1,90 @@
+@use '../../styles/variables.scss' as *;
+
+// Clean, modern, warm button styles
+.btn-primary {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: white !important;
+  border: none !important;
+  padding: 0.75rem 2rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2) !important;
+  transform: translateY(0) !important;
+  
+  &:hover {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
+  }
+  
+  &:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 1px 4px rgba(245, 158, 11, 0.2) !important;
+  }
+  
+  &:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3) !important;
+  }
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #374151 !important;
+  padding: 0.75rem 2rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  transition: all 0.2s ease !important;
+  transform: translateY(0) !important;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    color: #1f2937 !important;
+  }
+  
+  &:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  &:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3) !important;
+  }
+}
+
+.btn-outline {
+  background: transparent !important;
+  border: 2px solid #f59e0b !important;
+  color: #f59e0b !important;
+  padding: 0.75rem 2rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  transition: all 0.2s ease !important;
+  transform: translateY(0) !important;
+  
+  &:hover {
+    background: #f59e0b !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
+  }
+  
+  &:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 1px 4px rgba(245, 158, 11, 0.2) !important;
+  }
+  
+  &:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3) !important;
+  }
+}

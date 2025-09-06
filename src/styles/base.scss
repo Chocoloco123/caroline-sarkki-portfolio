@@ -1,0 +1,16 @@
+// Base styles
+.base {
+  // Add any base styles here
+}
+
+// App container
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Main content
+main {
+  flex: 1;
+}

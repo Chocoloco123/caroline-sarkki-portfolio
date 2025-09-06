@@ -1,0 +1,82 @@
+@use '../styles/variables.scss' as *;
+
+.about {
+  background-color: $bg-secondary;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: $spacing-3xl;
+  align-items: center;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+  }
+}
+
+.about-text {
+  p {
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-lg;
+    color: $text-secondary;
+    line-height: 1.7;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-xl;
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+}
+
+.stat {
+  text-align: center;
+  padding: $spacing-xl;
+  background: white;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-md;
+  transition: all $transition-normal;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: $gradient-warm;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: $shadow-xl;
+  }
+
+  h3 {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    background: $gradient-warm;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: $spacing-sm;
+  }
+
+  p {
+    color: $text-muted;
+    font-weight: $font-weight-medium;
+  }
+}

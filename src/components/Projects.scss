@@ -1,0 +1,109 @@
+@use '../styles/variables.scss' as *;
+
+.projects {
+  background-color: $bg-secondary;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: $spacing-xl;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-card {
+  background: white;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  box-shadow: $shadow-md;
+  transition: all $transition-normal;
+
+  &:hover {
+    box-shadow: $shadow-xl;
+  }
+}
+
+.project-image {
+  height: 200px;
+  background: $gradient-warm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+    z-index: 1;
+  }
+
+  i {
+    font-size: 3rem;
+    z-index: 2;
+    position: relative;
+  }
+}
+
+.project-content {
+  padding: $spacing-xl;
+
+  h3 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    color: $text-muted;
+    margin-bottom: $spacing-lg;
+    line-height: 1.6;
+  }
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-lg;
+}
+
+.tech-tag {
+  background: linear-gradient(135deg, $primary-amber-light, $accent-cool);
+  color: white;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-full;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+  transition: all $transition-normal;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  }
+}
+
+.project-link {
+  color: $primary-amber;
+  text-decoration: none;
+  font-weight: $font-weight-semibold;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  transition: color $transition-normal;
+
+  &:hover {
+    color: $primary-amber-dark;
+  }
+}

@@ -1,0 +1,171 @@
+'use client'
+
+import React from 'react'
+import { motion } from 'framer-motion'
+import { Project } from '../types'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import './Projects.scss'
+
+const Projects: React.FC = () => {
+  const professionalProjects: Project[] = [
+    {
+      id: 'voter-guide',
+      title: 'KQED Voter Guide',
+      description: 'Developed a comprehensive voter guide application that helps users make informed decisions during elections. Features include candidate information, ballot measures, and voting locations.',
+      technologies: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
+      link: 'https://www.kqed.org/',
+      icon: 'fas fa-vote-yea'
+    },
+    {
+      id: 'navigation',
+      title: 'Navigation System Redesign',
+      description: 'Completely reinvented KQED\'s navigation menu system to improve user experience and accessibility. Implemented responsive design and performance optimizations.',
+      technologies: ['JavaScript', 'TypeScript', 'Sass', 'Accessibility'],
+      link: 'https://www.kqed.org/',
+      icon: 'fas fa-bars'
+    },
+    {
+      id: 'micro-websites',
+      title: 'Micro Websites',
+      description: 'Built and maintained various micro websites for KQED, focusing on performance, SEO optimization, and user engagement. Each site tailored to specific content needs.',
+      technologies: ['HTML5', 'Sass', 'TypeScript', 'SEO'],
+      link: 'https://www.kqed.org/',
+      icon: 'fas fa-globe'
+    },
+    {
+      id: 'user-accounts',
+      title: 'User Account System',
+      description: 'Revamped KQED\'s user accounts and login flow, implementing secure authentication, improved UX, and streamlined account management features.',
+      technologies: ['Authentication', 'Security', 'UX Design'],
+      link: 'https://www.kqed.org/',
+      icon: 'fas fa-user-cog'
+    }
+  ]
+
+  const personalProjects: Project[] = [
+    {
+      id: 'ai-note-app',
+      title: 'AI-Powered Note Taking App',
+      description: 'Built a sophisticated note-taking application that leverages OpenAI API for intelligent summarization. Features include smart categorization, automatic summaries, and search functionality.',
+      technologies: ['React', 'TypeScript', 'Node.js', 'OpenAI API', 'PostgreSQL'],
+      link: '#',
+      icon: 'fas fa-brain'
+    },
+    {
+      id: 'chrome-extension',
+      title: 'Web Content Summarizer Extension',
+      description: 'Developed a Chrome extension that provides instant AI-powered summaries of web page content. Helps users quickly understand lengthy articles and documents.',
+      technologies: ['TypeScript', 'Chrome APIs', 'OpenAI API', 'Web Extensions'],
+      link: '#',
+      icon: 'fab fa-chrome'
+    },
+    {
+      id: 'mini-games',
+      title: 'Interactive Mini Games Collection',
+      description: 'Created a collection of engaging mini games with modern web technologies. Features responsive design, smooth animations, and intuitive gameplay mechanics.',
+      technologies: ['TypeScript', 'HTML5 Canvas', 'Sass', 'Game Development'],
+      link: '#',
+      icon: 'fas fa-gamepad'
+    },
+    {
+      id: 'ai-job-agent',
+      title: 'AI Job Search Agent',
+      description: 'Developed an intelligent job search agent that uses OpenAI API to aggregate and analyze job postings. Provides personalized recommendations and insights.',
+      technologies: ['Python', 'OpenAI API', 'Web Scraping', 'Data Analysis'],
+      link: '#',
+      icon: 'fas fa-search'
+    }
+  ]
+
+  const renderProjectCard = (project: Project, index: number) => (
+    <motion.div
+      key={project.id}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -10 }}
+    >
+      <Card className="project-card h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/10 backdrop-blur-sm">
+        <CardHeader className="text-center">
+          <div className="project-image mx-auto mb-4" aria-hidden="true">
+            <i className={project.icon}></i>
+          </div>
+          <CardTitle className="text-xl font-bold text-white">{project.title}</CardTitle>
+        </CardHeader>
+        <CardContent className="text-center">
+          <CardDescription className="text-white/80 mb-4 leading-relaxed">
+            {project.description}
+          </CardDescription>
+          <div className="project-tech flex flex-wrap justify-center gap-2 mb-4" role="list" aria-label="Technologies used">
+            {project.technologies.map((tech) => (
+              <Badge 
+                key={tech} 
+                variant="secondary" 
+                className="bg-white/20 text-white hover:bg-white/30 border-white/30"
+                role="listitem"
+              >
+                {tech}
+              </Badge>
+            ))}
+          </div>
+          <a 
+            href={project.link} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="project-link inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+            aria-label={`View ${project.title} project`}
+          >
+            View Project <i className="fas fa-external-link-alt" aria-hidden="true"></i>
+          </a>
+        </CardContent>
+      </Card>
+    </motion.div>
+  )
+
+  return (
+    <section id="projects" className="projects" aria-labelledby="projects-heading">
+      <div className="container">
+        <motion.h2 
+          id="projects-heading"
+          className="section-title"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Featured Projects
+        </motion.h2>
+        
+        {/* Professional Projects */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-2xl font-semibold text-white mb-6 text-center">Professional Work at KQED</h3>
+          <div className="projects-grid mb-16">
+            {professionalProjects.map((project, index) => renderProjectCard(project, index))}
+          </div>
+        </motion.div>
+
+        {/* Personal Projects */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-2xl font-semibold text-white mb-6 text-center">Personal Projects</h3>
+          <div className="projects-grid">
+            {personalProjects.map((project, index) => renderProjectCard(project, index))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+export default Projects
