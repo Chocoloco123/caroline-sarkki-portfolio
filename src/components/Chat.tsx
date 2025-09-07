@@ -17,7 +17,7 @@ const Chat: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hi! This is Caroline, how can I help you today? 😊",
+      text: "Hi! I'm Clio, Caroline's AI chatbot assistant. I can help you learn about her work, projects, and experience. What would you like to know? 🤖",
       sender: 'caroline',
       timestamp: new Date()
     }
@@ -83,9 +83,22 @@ const Chat: React.FC = () => {
 
       const data = await response.json()
       
+      // Clean the response text
+      const cleanResponse = (text: string) => {
+        return text
+          // Remove markdown code blocks
+          .replace(/```html\n?/g, '')
+          .replace(/```\n?/g, '')
+          // Remove any stray backticks
+          .replace(/`/g, '')
+          // Clean up extra whitespace
+          .replace(/\n\s*\n/g, '\n')
+          .trim()
+      }
+      
       const carolineMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: data.response || data.message || "I'm sorry, I couldn't process that request right now. Please try again!",
+        text: cleanResponse(data.response || data.message || "I'm sorry, I couldn't process that request right now. Please try again!"),
         sender: 'caroline',
         timestamp: new Date()
       }
@@ -124,7 +137,7 @@ const Chat: React.FC = () => {
         onClick={toggleChat}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        aria-label={isOpen ? 'Close chat' : 'Open chat with Caroline'}
+        aria-label={isOpen ? 'Close chat' : 'Open chat with Clio chatbot'}
       >
         <motion.div
           className="chat-icon"
@@ -144,7 +157,7 @@ const Chat: React.FC = () => {
             animate={{ scale: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <span>💬</span>
+            <span>🤖</span>
           </motion.div>
         )}
       </motion.button>
@@ -162,10 +175,12 @@ const Chat: React.FC = () => {
             <div className="chat-header">
               <div className="chat-title">
                 <div className="chat-avatar">
-                  <img src="/caroline-headshot.jpg" alt="Caroline" />
+                  <img src="/clio-chatbot-icon.svg" alt="Clio" />
                 </div>
                 <div className="chat-info">
-                  <h3>Chat with Caroline</h3>
+                  <h3>
+                    Clio
+                  </h3>
                   <div className="status-container">
                     <span className="status">Online</span>
                     {process.env.NODE_ENV === 'development' && backendInfo && (
@@ -227,7 +242,7 @@ const Chat: React.FC = () => {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Ask me anything..."
+                  placeholder="Ask Clio about Caroline's work..."
                   disabled={isLoading}
                   aria-label="Type your message"
                 />

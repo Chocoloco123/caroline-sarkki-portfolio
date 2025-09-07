@@ -1,5 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+// Function to convert plain text email addresses to clickable mailto links
+function convertEmailsToLinks(text: string): string {
+  // Simple regex to find email addresses that are not already in HTML links
+  const emailRegex = /\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,})\b/g
+  
+  return text.replace(emailRegex, (match, email) => {
+    // Check if this email is already wrapped in an <a> tag
+    const beforeMatch = text.substring(0, text.indexOf(match))
+    const afterMatch = text.substring(text.indexOf(match) + match.length)
+    
+    // If there's an opening <a> tag before and closing </a> after, don't convert
+    if (beforeMatch.includes('<a ') && afterMatch.includes('</a>')) {
+      return match
+    }
+    
+    return `<a href="mailto:${email}" style="color: #059669; text-decoration: underline; font-weight: 500;">${email}</a>`
+  })
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { query } = await request.json()
@@ -35,6 +54,11 @@ export async function POST(request: NextRequest) {
     }
 
     const data = await response.json()
+    
+    // Convert plain text email addresses to clickable links
+    if (data.response) {
+      data.response = convertEmailsToLinks(data.response)
+    }
     
     return NextResponse.json(data)
   } catch (error) {
