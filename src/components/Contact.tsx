@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 import { ContactFormData, SocialLink } from '../types'
 import { Button } from '@/components/ui/button'
+import Icon from '@/components/ui/icon'
 import './Contact.scss'
 
 const Contact: React.FC = () => {
@@ -18,9 +19,9 @@ const Contact: React.FC = () => {
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
 
   const socialLinks: SocialLink[] = [
-    { platform: 'Email', url: 'mailto:csarkki.swe@gmail.com', icon: 'fas fa-envelope' },
-    { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki-2a5517126/', icon: 'fab fa-linkedin' },
-    { platform: 'GitHub', url: 'https://github.com/Chocoloco123', icon: 'fab fa-github' }
+    { platform: 'Email', url: 'mailto:csarkki.swe@gmail.com', icon: 'envelope' },
+    { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki-2a5517126/', icon: 'linkedin' },
+    { platform: 'GitHub', url: 'https://github.com/Chocoloco123', icon: 'github' }
   ]
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -103,14 +104,14 @@ const Contact: React.FC = () => {
             <div className="contact-details">
               {socialLinks.map((social) => (
                 <div key={social.platform} className="contact-item">
-                  <i className={social.icon}></i>
+                  <Icon name={social.icon} size={20} />
                   <a href={social.url} target="_blank" rel="noopener noreferrer">
                     {social.platform === 'Email' ? 'csarkki.swe@gmail.com' : `${social.platform} Profile`}
                   </a>
                 </div>
               ))}
               <div className="contact-item">
-                <i className="fas fa-map-marker-alt"></i>
+                <Icon name="map-marker-alt" size={20} />
                 <span>San Francisco Bay Area</span>
               </div>
             </div>

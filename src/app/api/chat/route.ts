@@ -19,6 +19,12 @@ function convertEmailsToLinks(text: string): string {
   })
 }
 
+// Function to convert comma-separated skills into pill format (COMPLETELY DISABLED)
+function convertSkillsToPills_DISABLED(text: string): string {
+  // All pill conversion disabled - return text as-is
+  return text
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { query } = await request.json()
@@ -55,9 +61,16 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json()
     
-    // Convert plain text email addresses to clickable links
+    // Convert plain text email addresses to clickable links (skills pills disabled for cleaner text)
     if (data.response) {
       data.response = convertEmailsToLinks(data.response)
+      // data.response = convertSkillsToPills(data.response) // Disabled for cleaner text display
+      
+      // Debug logging in development
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Original response:', data.response)
+        console.log('After email conversion:', data.response)
+      }
     }
     
     return NextResponse.json(data)

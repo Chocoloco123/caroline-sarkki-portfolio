@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
+import Icon from '@/components/ui/icon'
 import './Chat.scss'
 
 interface Message {
@@ -145,9 +146,9 @@ const Chat: React.FC = () => {
           transition={{ duration: 0.3 }}
         >
           {isOpen ? (
-            <i className="fas fa-times"></i>
+            <Icon name="times" size={20} />
           ) : (
-            <i className="fas fa-comments"></i>
+            <Icon name="comments" size={20} />
           )}
         </motion.div>
         {!isOpen && (
@@ -253,7 +254,7 @@ const Chat: React.FC = () => {
                   className="send-button"
                   aria-label="Send message"
                 >
-                  <i className="fas fa-paper-plane"></i>
+                  <Icon name="paper-plane" size={16} />
                 </Button>
               </div>
             </div>

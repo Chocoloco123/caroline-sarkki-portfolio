@@ -12,6 +12,21 @@
   color: white;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 1024px) and (min-width: 769px) {
+    padding-top: 100px;
+    min-height: calc(100vh - 100px);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding-top: 120px;
+    min-height: calc(100vh - 120px);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding-top: 80px;
+    min-height: calc(100vh - 80px);
+  }
   &::before {
     content: '';
     position: absolute;
@@ -51,7 +66,45 @@
   @media (max-width: $breakpoint-md) {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: $spacing-xl;
+    gap: $spacing-2xl;
+    padding: $spacing-2xl $spacing-lg;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg $spacing-md;
+    gap: $spacing-lg;
+  }
+}
+
+.hero-content {
+  background: rgba(15, 23, 42, 0.85);
+  padding: $spacing-xl;
+  border-radius: $radius-lg;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+
+  @media (max-width: 1024px) and (min-width: 769px) {
+    margin-top: $spacing-xl;
+    margin-bottom: $spacing-xl;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-xl;
+    margin: 0 $spacing-lg;
+    max-width: 90%;
+    margin-top: $spacing-2xl;
+    margin-bottom: $spacing-2xl;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg;
+    margin: 0 $spacing-md;
+    max-width: 95%;
+    margin-top: $spacing-md;
+    margin-bottom: $spacing-lg;
   }
 }
 
@@ -60,6 +113,7 @@
   font-weight: $font-weight-bold;
   margin-bottom: $spacing-md;
   line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 
   @media (max-width: $breakpoint-md) {
     font-size: $font-size-4xl;
@@ -76,6 +130,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-weight: $font-weight-bold;
+  text-shadow: none;
 }
 
 .hero-subtitle {
@@ -83,6 +138,7 @@
   font-weight: $font-weight-normal;
   margin-bottom: $spacing-lg;
   opacity: 0.9;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 
   @media (max-width: $breakpoint-md) {
     font-size: $font-size-xl;
@@ -94,6 +150,7 @@
   margin-bottom: $spacing-xl;
   opacity: 0.8;
   line-height: 1.7;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 
   @media (max-width: $breakpoint-md) {
     font-size: $font-size-base;
@@ -105,15 +162,26 @@
   gap: $spacing-md;
   margin-bottom: $spacing-xl;
 
+  @media (max-width: $breakpoint-md) {
+    gap: $spacing-lg;
+    justify-content: center;
+  }
+
   @media (max-width: $breakpoint-sm) {
     flex-direction: column;
     align-items: center;
+    gap: $spacing-md;
   }
 }
 
 .hero-social {
   display: flex;
   gap: $spacing-md;
+  justify-content: center;
+
+  @media (max-width: $breakpoint-md) {
+    gap: $spacing-lg;
+  }
 }
 
 .social-link {

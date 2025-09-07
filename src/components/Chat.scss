@@ -30,6 +30,16 @@
     color: white;
     font-size: 24px;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   .chat-badge {
@@ -67,7 +77,7 @@
   bottom: 90px;
   right: 20px;
   width: 350px;
-  height: 500px;
+  height: 600px;
   background: white;
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
@@ -186,11 +196,17 @@
   flex: 1;
   padding: 20px;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: visible;
   display: flex;
   flex-direction: column;
   gap: 12px;
   background: #f8fafc;
+  max-width: none;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
+  width: 100%;
+  max-height: 70vh;
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -238,7 +254,12 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       overflow-wrap: break-word;
       word-wrap: break-word;
-      max-width: 100%;
+      max-width: none;
+      overflow: visible;
+      word-break: break-word;
+      hyphens: auto;
+      min-width: 0;
+      width: 100%;
 
       p {
         margin: 0;
@@ -251,6 +272,12 @@
         font-size: 14px;
         line-height: 1.4;
         word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: none;
+        overflow: visible;
+        word-break: break-word;
+        hyphens: auto;
+        width: 100%;
 
         // Style formatted content from backend
         p {
@@ -326,7 +353,89 @@
           gap: 6px;
           margin: 8px 0;
 
-          .skill-tag {
+          // .skill-tag {
+          //   background: #f1f5f9;
+          //   color: #475569;
+          //   padding: 4px 8px;
+          //   border-radius: 12px;
+          //   font-size: 12px;
+          //   font-weight: 500;
+          //   border: 1px solid #e2e8f0;
+          //   white-space: nowrap;
+          //   display: inline-block;
+          //   margin: 2px 4px 2px 0;
+          //   transition: all 0.2s ease;
+          //   
+          //   &:hover {
+          //     background: #e2e8f0;
+          //     transform: translateY(-1px);
+          //   }
+          // }
+        }
+
+        // Style nested lists with skills as pills
+        ul ul li {
+          display: inline-block;
+          margin: 2px 4px 2px 0;
+          
+          code {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+            white-space: nowrap;
+            display: inline-block;
+            font-family: inherit;
+          }
+        }
+
+        // Style any code elements that look like skills
+        code {
+          background: #f1f5f9;
+          color: #475569;
+          padding: 4px 8px;
+          border-radius: 12px;
+          font-size: 12px;
+          font-weight: 500;
+          border: 1px solid #e2e8f0;
+          white-space: nowrap;
+          display: inline-block;
+          font-family: inherit;
+        }
+
+        // Handle skills that appear as plain text in lists
+        li {
+          // Style any text that looks like a skill (short words/phrases)
+          span, em, strong {
+            // If it's a short phrase that could be a skill, style it as a pill
+            &:not(.skill-tag):not([class*="skill"]) {
+              // Check if the text is short and could be a skill
+              &[data-skill="true"] {
+                background: #f1f5f9;
+                color: #475569;
+                padding: 4px 8px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: 500;
+                border: 1px solid #e2e8f0;
+                white-space: nowrap;
+                display: inline-block;
+                margin: 2px;
+              }
+            }
+          }
+        }
+
+        // Style comma-separated skills as individual pills
+        .skill-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          
+          .skill-item {
             background: #f1f5f9;
             color: #475569;
             padding: 4px 8px;
@@ -359,16 +468,84 @@
           }
         }
 
+        // Handle skills in paragraph text (disabled)
+        // p {
+        //   .skill-tag {
+        //     margin: 2px 4px 2px 0;
+        //   }
+        // }
+
+        // Skill pill styling disabled for cleaner text display
+        // .skill-tag {
+        //   // Override any conflicting styles
+        //   background: #f1f5f9 !important;
+        //   color: #475569 !important;
+        //   padding: 4px 8px !important;
+        //   border-radius: 12px !important;
+        //   font-size: 12px !important;
+        //   font-weight: 500 !important;
+        //   border: 1px solid #e2e8f0 !important;
+        //   white-space: nowrap !important;
+        //   display: inline-block !important;
+        //   margin: 2px 4px 2px 0 !important;
+        //   transition: all 0.2s ease !important;
+        //   vertical-align: middle !important;
+        //   max-width: none !important;
+        //   word-break: normal !important;
+        //   overflow: visible !important;
+        //   text-overflow: unset !important;
+        //   
+        //   &:hover {
+        //     background: #e2e8f0 !important;
+        //     transform: translateY(-1px) !important;
+        //   }
+        // }
+
+        // Skill pill related styling disabled for cleaner text display
+        // .skill-tag + * {
+        //   vertical-align: middle !important;
+        //   margin-left: 4px !important;
+        // }
+
+        // .skill-description {
+        //   color: #64748b !important;
+        //   font-size: 11px !important;
+        //   font-style: italic !important;
+        //   vertical-align: middle !important;
+        //   margin-left: 4px !important;
+        // }
+
         // Handle inline elements and spans that might be skill tags
         span {
           display: inline;
           word-wrap: break-word;
+          max-width: 100%;
         }
 
         // Ensure lists don't overflow
         ul, ol {
           overflow-wrap: break-word;
           word-wrap: break-word;
+          max-width: 100%;
+        }
+
+        // Ensure all text content wraps properly
+        p, div, li {
+          overflow-wrap: break-word !important;
+          word-wrap: break-word !important;
+          word-break: break-word !important;
+          max-width: 100% !important;
+          hyphens: auto !important;
+        }
+
+        // Ensure skill containers wrap properly
+        .skill-list, .skill-category {
+          display: flex !important;
+          flex-wrap: wrap !important;
+          gap: 4px !important;
+          max-width: 100% !important;
+          overflow-wrap: break-word !important;
+          min-width: 0 !important;
         }
 
         // Handle any inline code or tags that might be cut off
@@ -583,8 +760,11 @@
         transform: none;
       }
 
-      i {
-        font-size: 14px;
+      svg {
+        width: 16px !important;
+        height: 16px !important;
+        pointer-events: none;
+        flex-shrink: 0;
       }
     }
   }
@@ -600,6 +780,11 @@
 
     .chat-icon {
       font-size: 20px;
+      
+      svg {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 
@@ -607,7 +792,7 @@
     bottom: 80px;
     right: 15px;
     width: 320px;
-    height: 450px;
+    height: 550px;
   }
 }
 
@@ -666,6 +851,10 @@
       color: #3b82f6;
       text-decoration: underline;
       transition: color 0.2s ease;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      max-width: 100%;
+    }
       
       &:hover {
         color: #1d4ed8;
@@ -704,4 +893,3 @@
       }
     }
   }
-}

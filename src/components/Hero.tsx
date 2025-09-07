@@ -3,13 +3,14 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
+import Icon from '@/components/ui/icon'
 import './Hero.scss'
 
 const Hero: React.FC = () => {
   const socialLinks = [
-    { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki-2a5517126/', icon: 'fab fa-linkedin' },
-    { platform: 'GitHub', url: 'https://github.com/Chocoloco123', icon: 'fab fa-github' },
-    { platform: 'Email', url: 'mailto:csarkki.swe@gmail.com', icon: 'fas fa-envelope' }
+    { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki-2a5517126/', icon: 'linkedin' },
+    { platform: 'GitHub', url: 'https://github.com/Chocoloco123', icon: 'github' },
+    { platform: 'Email', url: 'mailto:csarkki.swe@gmail.com', icon: 'envelope' }
   ]
 
   const scrollToSection = (sectionId: string) => {
@@ -30,7 +31,7 @@ const Hero: React.FC = () => {
           className="hero-content"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         >
           <h1 className="hero-title">
             Hi, I'm <span className="highlight">Caroline Sarkki</span>
@@ -83,7 +84,7 @@ const Hero: React.FC = () => {
                 className="social-link"
                 aria-label={`Visit Caroline Sarkki's ${social.platform} profile`}
               >
-                <i className={social.icon} aria-hidden="true"></i>
+                <Icon name={social.icon} size={20} />
                 <span className="sr-only">{social.platform}</span>
               </a>
             ))}
@@ -96,20 +97,15 @@ const Hero: React.FC = () => {
               src="/caroline-headshot.jpg" 
               alt="Caroline Sarkki - Full Stack Software Engineer"
               className="hero-photo"
+              loading="eager"
+              decoding="async"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 console.error('Headshot failed to load:', target.src);
-                // Try alternative paths
-                if (target.src.includes('/caroline-headshot.jpg')) {
-                  target.src = './caroline-headshot.jpg';
-                } else if (target.src.includes('./caroline-headshot.jpg')) {
-                  target.src = 'caroline-headshot.jpg';
-                } else {
-                  // Show placeholder if all attempts fail
-                  target.style.display = 'none';
-                  if (target.parentElement) {
-                    target.parentElement.innerHTML = '<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f59e0b, #f97316); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Photo</div>';
-                  }
+                // Show placeholder if image fails to load
+                target.style.display = 'none';
+                if (target.parentElement) {
+                  target.parentElement.innerHTML = '<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f59e0b, #f97316); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Photo</div>';
                 }
               }}
             />

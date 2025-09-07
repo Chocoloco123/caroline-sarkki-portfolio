@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Project } from '../types'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import Icon from '@/components/ui/icon'
 import './Projects.scss'
 
 const Projects: React.FC = () => {
@@ -15,7 +16,7 @@ const Projects: React.FC = () => {
       description: 'Developed a comprehensive voter guide application that helps users make informed decisions during elections. Features include candidate information, ballot measures, and voting locations.',
       technologies: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
       link: 'https://www.kqed.org/',
-      icon: 'fas fa-vote-yea'
+      icon: 'vote-yea'
     },
     {
       id: 'navigation',
@@ -23,7 +24,7 @@ const Projects: React.FC = () => {
       description: 'Completely reinvented KQED\'s navigation menu system to improve user experience and accessibility. Implemented responsive design and performance optimizations.',
       technologies: ['JavaScript', 'TypeScript', 'Sass', 'Accessibility'],
       link: 'https://www.kqed.org/',
-      icon: 'fas fa-bars'
+      icon: 'bars'
     },
     {
       id: 'micro-websites',
@@ -31,7 +32,7 @@ const Projects: React.FC = () => {
       description: 'Built and maintained various micro websites for KQED, focusing on performance, SEO optimization, and user engagement. Each site tailored to specific content needs.',
       technologies: ['HTML5', 'Sass', 'TypeScript', 'SEO'],
       link: 'https://www.kqed.org/',
-      icon: 'fas fa-globe'
+      icon: 'globe'
     },
     {
       id: 'user-accounts',
@@ -39,7 +40,7 @@ const Projects: React.FC = () => {
       description: 'Revamped KQED\'s user accounts and login flow, implementing secure authentication, improved UX, and streamlined account management features.',
       technologies: ['Authentication', 'Security', 'UX Design'],
       link: 'https://www.kqed.org/',
-      icon: 'fas fa-user-cog'
+      icon: 'user-cog'
     }
   ]
 
@@ -50,7 +51,7 @@ const Projects: React.FC = () => {
       description: 'Built a sophisticated note-taking application that leverages OpenAI API for intelligent summarization. Features include smart categorization, automatic summaries, and search functionality.',
       technologies: ['React', 'TypeScript', 'Node.js', 'OpenAI API', 'PostgreSQL'],
       link: '#',
-      icon: 'fas fa-brain'
+      icon: 'brain'
     },
     {
       id: 'chrome-extension',
@@ -58,7 +59,7 @@ const Projects: React.FC = () => {
       description: 'Developed a Chrome extension that provides instant AI-powered summaries of web page content. Helps users quickly understand lengthy articles and documents.',
       technologies: ['TypeScript', 'Chrome APIs', 'OpenAI API', 'Web Extensions'],
       link: '#',
-      icon: 'fab fa-chrome'
+      icon: 'chrome'
     },
     {
       id: 'mini-games',
@@ -66,7 +67,7 @@ const Projects: React.FC = () => {
       description: 'Created a collection of engaging mini games with modern web technologies. Features responsive design, smooth animations, and intuitive gameplay mechanics.',
       technologies: ['TypeScript', 'HTML5 Canvas', 'Sass', 'Game Development'],
       link: '#',
-      icon: 'fas fa-gamepad'
+      icon: 'gamepad'
     },
     {
       id: 'ai-job-agent',
@@ -74,23 +75,23 @@ const Projects: React.FC = () => {
       description: 'Developed an intelligent job search agent that uses OpenAI API to aggregate and analyze job postings. Provides personalized recommendations and insights.',
       technologies: ['Python', 'OpenAI API', 'Web Scraping', 'Data Analysis'],
       link: '#',
-      icon: 'fas fa-search'
+      icon: 'search'
     }
   ]
 
   const renderProjectCard = (project: Project, index: number) => (
     <motion.div
       key={project.id}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -10 }}
+      transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{ y: -5 }}
     >
       <Card className="project-card h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/10 backdrop-blur-sm p-2">
         <CardHeader className="text-center px-8 pb-4">
           <div className="project-image mx-auto mb-6" aria-hidden="true">
-            <i className={project.icon}></i>
+            <Icon name={project.icon} size={32} />
           </div>
           <CardTitle className="text-xl font-bold text-white">{project.title}</CardTitle>
         </CardHeader>

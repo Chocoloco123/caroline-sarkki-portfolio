@@ -3,13 +3,14 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Chat from './Chat'
+import Icon from '@/components/ui/icon'
 import './Footer.scss'
 
 const Footer: React.FC = () => {
   const socialLinks = [
-    { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki-2a5517126/', icon: 'fab fa-linkedin' },
-    { platform: 'GitHub', url: 'https://github.com/Chocoloco123', icon: 'fab fa-github' },
-    { platform: 'Email', url: 'mailto:csarkki.swe@gmail.com', icon: 'fas fa-envelope' }
+    { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki-2a5517126/', icon: 'linkedin' },
+    { platform: 'GitHub', url: 'https://github.com/Chocoloco123', icon: 'github' },
+    { platform: 'Email', url: 'mailto:csarkki.swe@gmail.com', icon: 'envelope' }
   ]
 
   return (
@@ -29,7 +30,7 @@ const Footer: React.FC = () => {
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <i className={social.icon}></i>
+                  <Icon name={social.icon} size={20} />
                 </motion.a>
               ))}
             </div>
