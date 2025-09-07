@@ -79,11 +79,11 @@ section {
   font-size: $font-size-base;
 
   &-primary {
-    background-color: $primary-amber;
+    background-color: $primary-slate;
     color: white;
 
     &:hover {
-      background-color: $primary-amber-dark;
+      background-color: $primary-slate-dark;
       transform: translateY(-2px);
       box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
     }
@@ -96,7 +96,7 @@ section {
 
     &:hover {
       background-color: white;
-      color: $primary-amber;
+      color: $primary-slate;
       transform: translateY(-2px);
     }
   }

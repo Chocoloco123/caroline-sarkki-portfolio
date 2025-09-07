@@ -1,3 +1,5 @@
+@use '../styles/variables.scss' as *;
+
 // Chat Component Styles
 .chat-toggle {
   position: fixed;
@@ -28,7 +30,7 @@
 
   .chat-icon {
     color: white;
-    font-size: 24px;
+    font-size: 28px;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -37,8 +39,8 @@
     height: 100%;
 
     svg {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
     }
   }
 
@@ -107,16 +109,16 @@
     gap: 12px;
 
     .chat-avatar {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid rgba(255, 255, 255, 0.3);
-      background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+      background: linear-gradient(135deg, $primary-slate 0%, $accent-blue 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+      box-shadow: 0 2px 8px rgba(71, 85, 105, 0.3);
 
       img {
         width: 100%;
@@ -126,10 +128,10 @@
 
       // For SVG icons - make Clio bigger and more visible
       img[src$=".svg"] {
-        width: 32px;
-        height: 32px;
+        width: 40px;
+        height: 40px;
         object-fit: contain;
-        padding: 1px;
+        padding: 2px;
         filter: brightness(1.1) contrast(1.1);
       }
     }
@@ -224,6 +226,8 @@
   .message {
     display: flex;
     max-width: 80%;
+    min-width: 0;
+    width: 100%;
 
     &.user {
       align-self: flex-end;
@@ -254,8 +258,8 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       overflow-wrap: break-word;
       word-wrap: break-word;
-      max-width: none;
-      overflow: visible;
+      max-width: 100%;
+      overflow: hidden;
       word-break: break-word;
       hyphens: auto;
       min-width: 0;
@@ -273,8 +277,8 @@
         line-height: 1.4;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        max-width: none;
-        overflow: visible;
+        max-width: 100%;
+        overflow: hidden;
         word-break: break-word;
         hyphens: auto;
         width: 100%;
@@ -301,11 +305,22 @@
         ul, ol {
           margin: 8px 0;
           padding-left: 20px;
+          list-style: disc;
+        }
+        
+        ul {
+          list-style-type: disc;
+        }
+        
+        ol {
+          list-style-type: decimal;
         }
 
         li {
           margin: 4px 0;
           line-height: 1.4;
+          display: list-item;
+          list-style-position: outside;
         }
 
         strong {
@@ -375,7 +390,6 @@
 
         // Style nested lists with skills as pills
         ul ul li {
-          display: inline-block;
           margin: 2px 4px 2px 0;
           
           code {
@@ -389,6 +403,7 @@
             white-space: nowrap;
             display: inline-block;
             font-family: inherit;
+            vertical-align: middle;
           }
         }
 
@@ -404,6 +419,7 @@
           white-space: nowrap;
           display: inline-block;
           font-family: inherit;
+          vertical-align: middle;
         }
 
         // Handle skills that appear as plain text in lists
@@ -579,7 +595,6 @@
 
         // Fix section header alignment with skills
         li strong {
-          display: inline-block;
           margin-right: 8px;
           margin-bottom: 0;
           vertical-align: top;
@@ -590,7 +605,7 @@
         // Ensure skills align properly with their section headers
         li:has(strong) {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           flex-wrap: wrap;
           gap: 6px;
           
@@ -598,12 +613,12 @@
           strong {
             flex-shrink: 0;
             white-space: nowrap;
+            margin-bottom: 0;
           }
           
           // Style any content that follows the strong element
           > *:not(strong) {
-            display: inline-block;
-            vertical-align: top;
+            vertical-align: middle;
           }
         }
 
@@ -611,6 +626,8 @@
         ul li, ol li {
           line-height: 1.6;
           margin: 6px 0;
+          display: list-item;
+          list-style-position: outside;
           
           // Make sure all text within list items is properly aligned
           * {
@@ -779,11 +796,11 @@
     height: 55px;
 
     .chat-icon {
-      font-size: 20px;
+      font-size: 24px;
       
       svg {
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
       }
     }
   }

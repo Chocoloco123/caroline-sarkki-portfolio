@@ -4,7 +4,7 @@ A modern, responsive portfolio website showcasing full-stack development skills,
 
 ## 🌟 Live Demo
 
-[View Live Portfolio](https://your-portfolio-url.vercel.app) *(Update with your actual deployment URL)*
+[View Live Portfolio](https://caroline-sarkki-portfolio.vercel.app/)
 
 ## 🚀 Features
 

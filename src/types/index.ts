@@ -5,6 +5,7 @@ export interface Project {
   technologies: string[]
   link: string
   icon: string
+  screenshot?: string
 }
 
 export interface Skill {

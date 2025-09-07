@@ -57,7 +57,7 @@
   a {
     font-size: $font-size-2xl;
     font-weight: $font-weight-bold;
-    background: linear-gradient(135deg, $primary-amber, $primary-amber-dark, $accent-warm);
+    background: linear-gradient(135deg, $primary-slate, $primary-slate-dark, $accent-blue);
     background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -79,7 +79,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, $primary-amber, $primary-amber-dark, $accent-warm);
+      background: linear-gradient(135deg, $primary-slate, $primary-slate-dark, $accent-blue);
       background-size: 200% 200%;
       opacity: 0;
       transition: opacity $transition-normal;
@@ -158,14 +158,14 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, $primary-amber, $accent-warm, $accent-cool);
+    background: linear-gradient(90deg, $primary-slate, $accent-blue, $accent-blue-dark);
     transition: all $transition-normal;
     transform: translateX(-50%);
     border-radius: 1px;
   }
 
   &:hover {
-    color: $primary-amber;
+    color: $primary-slate;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
 
@@ -217,7 +217,7 @@
   .bar {
     width: 25px;
     height: 3px;
-    background: linear-gradient(90deg, $primary-amber, $accent-warm);
+    background: linear-gradient(90deg, $primary-slate, $accent-blue);
     margin: 3px 0;
     transition: all $transition-normal;
     border-radius: 2px;
@@ -226,7 +226,7 @@
   }
 
   &:hover .bar {
-    background: linear-gradient(90deg, $primary-amber-dark, $accent-warm);
+    background: linear-gradient(90deg, $primary-slate-dark, $accent-blue);
     transform: scale(1.1);
   }
 

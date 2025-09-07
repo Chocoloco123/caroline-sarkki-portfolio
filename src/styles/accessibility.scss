@@ -5,7 +5,7 @@
   position: absolute;
   top: -40px;
   left: 6px;
-  background: $primary-amber;
+  background: $primary-slate;
   color: white;
   padding: 8px;
   text-decoration: none;
@@ -21,7 +21,7 @@
 
 // Focus Management
 *:focus {
-  outline: 2px solid $primary-amber;
+  outline: 2px solid $primary-slate;
   outline-offset: 2px;
 }
 
@@ -32,7 +32,7 @@
 
 // Enhanced focus for keyboard users
 .focus-visible {
-  outline: 3px solid $primary-amber;
+  outline: 3px solid $primary-slate;
   outline-offset: 2px;
   box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
 }
@@ -86,7 +86,7 @@
   position: absolute;
   top: -40px;
   left: 6px;
-  background: $primary-amber;
+  background: $primary-slate;
   color: white;
   padding: 8px 16px;
   text-decoration: none;
@@ -108,7 +108,7 @@
 // Enhanced button accessibility
 .btn {
   &:focus-visible {
-    outline: 3px solid $primary-amber;
+    outline: 3px solid $primary-slate;
     outline-offset: 2px;
   }
   
@@ -121,7 +121,7 @@
 // Enhanced link accessibility
 a {
   &:focus-visible {
-    outline: 2px solid $primary-amber;
+    outline: 2px solid $primary-slate;
     outline-offset: 2px;
   }
 }
@@ -131,7 +131,7 @@ input,
 textarea,
 select {
   &:focus {
-    outline: 2px solid $primary-amber;
+    outline: 2px solid $primary-slate;
     outline-offset: 2px;
   }
   
@@ -147,7 +147,7 @@ select {
 // Navigation accessibility
 .nav-link {
   &:focus-visible {
-    outline: 2px solid $primary-amber;
+    outline: 2px solid $primary-slate;
     outline-offset: 2px;
   }
 }
@@ -155,7 +155,7 @@ select {
 // Project card accessibility
 .project-card {
   &:focus-within {
-    outline: 2px solid $primary-amber;
+    outline: 2px solid $primary-slate;
     outline-offset: 2px;
   }
 }
@@ -163,7 +163,7 @@ select {
 // Social link accessibility
 .social-link {
   &:focus-visible {
-    outline: 2px solid $primary-amber;
+    outline: 2px solid $primary-slate;
     outline-offset: 2px;
   }
 }
@@ -177,16 +177,16 @@ select {
 @media (prefers-color-scheme: dark) {
   .skip-link,
   .skip-to-content {
-    background: $primary-amber;
+    background: $primary-slate;
     color: white;
   }
   
   *:focus {
-    outline-color: $primary-amber;
+    outline-color: $primary-slate;
   }
   
   .focus-visible {
-    outline-color: $primary-amber;
+    outline-color: $primary-slate;
     box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
   }
 }

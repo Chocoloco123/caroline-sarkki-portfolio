@@ -44,11 +44,11 @@
 
   i {
     width: 20px;
-    color: $primary-amber;
+    color: $primary-slate;
   }
 
   a {
-    color: $primary-amber;
+    color: $primary-slate;
     text-decoration: none;
 
     &:hover {
@@ -79,7 +79,7 @@
 
     &:focus {
       outline: none;
-      border-color: $primary-amber;
+      border-color: $primary-slate;
     }
   }
 

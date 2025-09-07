@@ -39,7 +39,7 @@
   transform: translateX(-50%);
   width: 20px;
   height: 20px;
-  background: $primary-amber;
+  background: $primary-slate;
   border-radius: $radius-full;
   border: 4px solid white;
   box-shadow: 0 0 0 4px $border-light;
@@ -92,7 +92,7 @@
 
   h4 {
     font-size: $font-size-xl;
-    color: $primary-amber;
+    color: $primary-slate;
     margin-bottom: $spacing-sm;
   }
 }
@@ -117,7 +117,7 @@
       content: '▶';
       position: absolute;
       left: 0;
-      color: $primary-amber;
+      color: $primary-slate;
       font-size: $font-size-xs;
     }
   }

@@ -25,6 +25,25 @@ function convertSkillsToPills_DISABLED(text: string): string {
   return text
 }
 
+// Function to remove bold formatting from personal interests while keeping it for skills
+function processBoldFormatting(text: string): string {
+  // Check if this is about personal interests (not skills)
+  const isPersonalInterests = text.toLowerCase().includes('personal interests') || 
+                             text.toLowerCase().includes('hobbies') ||
+                             text.toLowerCase().includes('weekend hikes') ||
+                             text.toLowerCase().includes('salsa dancing') ||
+                             text.toLowerCase().includes('golden retriever') ||
+                             text.toLowerCase().includes('valkyries')
+  
+  if (isPersonalInterests) {
+    // Remove <strong> tags from list items in personal interests
+    return text.replace(/<strong>(.*?)<\/strong>/g, '$1')
+  }
+  
+  // Keep bold formatting for skills and other sections
+  return text
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { query } = await request.json()
@@ -61,9 +80,10 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json()
     
-    // Convert plain text email addresses to clickable links (skills pills disabled for cleaner text)
+    // Convert plain text email addresses to clickable links and process bold formatting
     if (data.response) {
       data.response = convertEmailsToLinks(data.response)
+      data.response = processBoldFormatting(data.response)
       // data.response = convertSkillsToPills(data.response) // Disabled for cleaner text display
       
       // Debug logging in development

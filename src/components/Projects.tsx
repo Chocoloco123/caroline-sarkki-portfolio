@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Project } from '../types'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -9,14 +9,20 @@ import Icon from '@/components/ui/icon'
 import './Projects.scss'
 
 const Projects: React.FC = () => {
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set())
+
+  const handleImageError = (projectId: string) => {
+    setImageErrors(prev => new Set(prev).add(projectId))
+  }
   const professionalProjects: Project[] = [
     {
       id: 'voter-guide',
       title: 'KQED Voter Guide',
       description: 'Developed a comprehensive voter guide application that helps users make informed decisions during elections. Features include candidate information, ballot measures, and voting locations.',
       technologies: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
-      link: 'https://www.kqed.org/',
-      icon: 'vote-yea'
+      link: 'https://www.kqed.org/voterguide',
+      icon: 'vote-yea',
+      screenshot: '/projects/professional/voter-guide.png'
     },
     {
       id: 'navigation',
@@ -24,23 +30,26 @@ const Projects: React.FC = () => {
       description: 'Completely reinvented KQED\'s navigation menu system to improve user experience and accessibility. Implemented responsive design and performance optimizations.',
       technologies: ['JavaScript', 'TypeScript', 'Sass', 'Accessibility'],
       link: 'https://www.kqed.org/',
-      icon: 'bars'
+      icon: 'bars',
+      screenshot: '/projects/professional/navigation-redesign.png'
     },
     {
       id: 'micro-websites',
       title: 'Micro Websites',
       description: 'Built and maintained various micro websites for KQED, focusing on performance, SEO optimization, and user engagement. Each site tailored to specific content needs.',
       technologies: ['HTML5', 'Sass', 'TypeScript', 'SEO'],
-      link: 'https://www.kqed.org/',
-      icon: 'globe'
+      link: 'https://youthmedia.kqed.org/',
+      icon: 'globe',
+      screenshot: '/projects/professional/micro-websites.png'
     },
     {
       id: 'user-accounts',
       title: 'User Account System',
       description: 'Revamped KQED\'s user accounts and login flow, implementing secure authentication, improved UX, and streamlined account management features.',
       technologies: ['Authentication', 'Security', 'UX Design'],
-      link: 'https://www.kqed.org/',
-      icon: 'user-cog'
+      link: 'https://www.kqed.org/account',
+      icon: 'user-cog',
+      screenshot: '/projects/professional/user-accounts.png'
     }
   ]
 
@@ -79,24 +88,45 @@ const Projects: React.FC = () => {
     }
   ]
 
-  const renderProjectCard = (project: Project, index: number) => (
-    <motion.div
-      key={project.id}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ y: -5 }}
-    >
-      <Card className="project-card h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/10 backdrop-blur-sm p-2">
-        <CardHeader className="text-center px-8 pb-4">
-          <div className="project-image mx-auto mb-6" aria-hidden="true">
-            <Icon name={project.icon} size={32} />
+  const renderProjectCard = (project: Project, index: number) => {
+    const hasImageError = imageErrors.has(project.id)
+    const shouldShowImage = project.screenshot && !hasImageError
+
+    return (
+      <motion.div
+        key={project.id}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
+        viewport={{ once: true, margin: "-50px" }}
+        whileHover={{ y: -5 }}
+      >
+        <Card className="project-card h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/95 backdrop-blur-sm p-2">
+          <CardHeader className="text-center px-8 pb-4">
+          <div className={`project-image mx-auto mb-6 ${shouldShowImage ? 'project-image-screenshot' : 'project-image-icon'}`} aria-hidden="true">
+            {shouldShowImage ? (
+              <img 
+                src={project.screenshot} 
+                alt={`${project.title} screenshot`}
+                className=""
+                onError={() => handleImageError(project.id)}
+                onLoad={() => {
+                  // Remove from error set if image loads successfully
+                  setImageErrors(prev => {
+                    const newSet = new Set(prev)
+                    newSet.delete(project.id)
+                    return newSet
+                  })
+                }}
+              />
+            ) : (
+              <Icon name={project.icon} size={32} />
+            )}
           </div>
-          <CardTitle className="text-xl font-bold text-white">{project.title}</CardTitle>
-        </CardHeader>
+            <CardTitle className="text-xl font-bold text-slate-800">{project.title}</CardTitle>
+          </CardHeader>
         <CardContent className="text-center px-8 pt-0">
-          <CardDescription className="text-white/80 mb-6 leading-relaxed">
+          <CardDescription className="text-slate-600 mb-6 leading-relaxed">
             {project.description}
           </CardDescription>
           <div className="project-tech flex flex-wrap justify-center gap-2 mb-6" role="list" aria-label="Technologies used">
@@ -104,7 +134,7 @@ const Projects: React.FC = () => {
               <Badge 
                 key={tech} 
                 variant="secondary" 
-                className="bg-white/20 text-white hover:bg-white/30 border-white/30"
+                className="bg-slate-100 text-slate-700 hover:bg-slate-200 border-slate-200 font-medium"
                 role="listitem"
               >
                 {tech}
@@ -115,7 +145,7 @@ const Projects: React.FC = () => {
             href={project.link} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="project-link inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+            className="project-link inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-semibold transition-colors"
             aria-label={`View ${project.title} project`}
           >
             View Project <i className="fas fa-external-link-alt" aria-hidden="true"></i>
@@ -123,7 +153,8 @@ const Projects: React.FC = () => {
         </CardContent>
       </Card>
     </motion.div>
-  )
+    )
+  }
 
   return (
     <section id="projects" className="projects" aria-labelledby="projects-heading">

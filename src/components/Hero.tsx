@@ -105,7 +105,7 @@ const Hero: React.FC = () => {
                 // Show placeholder if image fails to load
                 target.style.display = 'none';
                 if (target.parentElement) {
-                  target.parentElement.innerHTML = '<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f59e0b, #f97316); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Photo</div>';
+                  target.parentElement.innerHTML = '<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #475569, #3b82f6); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Photo</div>';
                 }
               }}
             />
