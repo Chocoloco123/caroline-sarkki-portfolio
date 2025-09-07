@@ -115,6 +115,12 @@
         font-weight: 600;
       }
 
+      .status-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
       .status {
         font-size: 12px;
         opacity: 0.8;
@@ -130,6 +136,16 @@
           border-radius: 50%;
           display: inline-block;
         }
+      }
+
+      .backend-indicator {
+        font-size: 10px;
+        opacity: 0.7;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 2px 6px;
+        border-radius: 8px;
+        display: inline-block;
+        width: fit-content;
       }
     }
   }
@@ -194,6 +210,60 @@
         font-size: 14px;
         line-height: 1.4;
         word-wrap: break-word;
+      }
+
+      .message-text {
+        font-size: 14px;
+        line-height: 1.4;
+        word-wrap: break-word;
+
+        // Style formatted content from backend
+        p {
+          margin: 0 0 8px 0;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        ul, ol {
+          margin: 8px 0;
+          padding-left: 20px;
+        }
+
+        li {
+          margin: 4px 0;
+        }
+
+        strong {
+          font-weight: 600;
+        }
+
+        em {
+          font-style: italic;
+        }
+
+        code {
+          background: rgba(0, 0, 0, 0.1);
+          padding: 2px 4px;
+          border-radius: 3px;
+          font-family: 'Courier New', monospace;
+          font-size: 12px;
+        }
+
+        pre {
+          background: rgba(0, 0, 0, 0.05);
+          padding: 8px;
+          border-radius: 4px;
+          overflow-x: auto;
+          margin: 8px 0;
+        }
+
+        blockquote {
+          border-left: 3px solid #667eea;
+          padding-left: 12px;
+          margin: 8px 0;
+          font-style: italic;
+        }
       }
 
       .message-time {

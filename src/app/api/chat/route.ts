@@ -11,7 +11,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const apiUrl = process.env.CHAT_API_URL || 'https://caroline-sarkki-portfolio-be-production.up.railway.app'
+    // Smart backend selection: localhost for development, Railway for production
+    const apiUrl = process.env.CHAT_API_URL || 
+      (process.env.NODE_ENV === 'development' 
+        ? 'http://localhost:8000' 
+        : 'https://caroline-sarkki-portfolio-be-production.up.railway.app')
+    
+    // Log which backend we're using (only in development)
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`🔗 Chat API using backend: ${apiUrl}`)
+    }
     
     const response = await fetch(`${apiUrl}/query`, {
       method: 'POST',

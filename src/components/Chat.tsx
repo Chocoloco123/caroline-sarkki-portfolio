@@ -24,6 +24,7 @@ const Chat: React.FC = () => {
   ])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [backendInfo, setBackendInfo] = useState<string>('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -39,6 +40,18 @@ const Chat: React.FC = () => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus()
     }
+  }, [isOpen])
+
+  // Detect which backend we're using (development only)
+  useEffect(() => {
+    // Only show backend info in development
+    if (process.env.NODE_ENV !== 'development') {
+      return
+    }
+
+    // Simple detection based on hostname (no API call needed)
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    setBackendInfo(isLocal ? '🖥️ Local Backend' : '☁️ Railway Backend')
   }, [isOpen])
 
   const sendMessage = async () => {
@@ -153,7 +166,12 @@ const Chat: React.FC = () => {
                 </div>
                 <div className="chat-info">
                   <h3>Chat with Caroline</h3>
-                  <span className="status">Online</span>
+                  <div className="status-container">
+                    <span className="status">Online</span>
+                    {process.env.NODE_ENV === 'development' && backendInfo && (
+                      <span className="backend-indicator">{backendInfo}</span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -168,7 +186,10 @@ const Chat: React.FC = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="message-content">
-                    <p>{message.text}</p>
+                    <div 
+                      dangerouslySetInnerHTML={{ __html: message.text }}
+                      className="message-text"
+                    />
                     <span className="message-time">
                       {message.timestamp.toLocaleTimeString([], { 
                         hour: '2-digit', 
