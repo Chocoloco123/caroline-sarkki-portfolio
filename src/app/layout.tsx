@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import './globals.css'
 import './globals.scss'
 
@@ -31,6 +32,7 @@ export default function RootLayout({
         <div className="app">
           {children}
         </div>
+        <SpeedInsights />
       </body>
     </html>
   )
