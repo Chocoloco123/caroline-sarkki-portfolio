@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 import { ContactFormData, SocialLink } from '../types'
 import { Button } from '@/components/ui/button'
 import './Contact.scss'
@@ -32,31 +33,41 @@ const Contact: React.FC = () => {
     setIsSubmitting(true)
 
     try {
-      // Using EmailJS for Vercel deployment
-      // You'll need to install: npm install @emailjs/browser
-      // And set up EmailJS account at emailjs.com
-      
-      // For now, simulate successful submission
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      // EmailJS configuration
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
+
+      // Check if EmailJS is properly configured
+      if (serviceId === 'YOUR_SERVICE_ID' || templateId === 'YOUR_TEMPLATE_ID' || publicKey === 'YOUR_PUBLIC_KEY') {
+        throw new Error('EmailJS not configured. Please check your environment variables.')
+      }
+
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'csarkki.swe@gmail.com', // Your email address
+        },
+        publicKey
+      )
+
+      console.log('Email sent successfully:', result.text)
       
       setNotification({ message: 'Message sent successfully! I\'ll get back to you soon.', type: 'success' })
       setFormData({ name: '', email: '', subject: '', message: '' })
       
-      // TODO: Replace with actual EmailJS implementation
-      // const result = await emailjs.send(
-      //   'YOUR_SERVICE_ID',
-      //   'YOUR_TEMPLATE_ID',
-      //   {
-      //     from_name: formData.name,
-      //     from_email: formData.email,
-      //     subject: formData.subject,
-      //     message: formData.message,
-      //   },
-      //   'YOUR_PUBLIC_KEY'
-      // )
-      
     } catch (error) {
-      setNotification({ message: 'Sorry, there was an error sending your message. Please try again.', type: 'error' })
+      console.error('EmailJS error:', error)
+      setNotification({ 
+        message: 'Sorry, there was an error sending your message. Please try again or contact me directly at csarkki.swe@gmail.com', 
+        type: 'error' 
+      })
     } finally {
       setIsSubmitting(false)
     }
