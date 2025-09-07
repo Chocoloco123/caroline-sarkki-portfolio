@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Critical CSS for SSR - prevent flash of unstyled content */
+.hero {
+  background-color: #0f172a !important;
+}
+
+.hero-image-container {
+  background-color: #f8fafc !important;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

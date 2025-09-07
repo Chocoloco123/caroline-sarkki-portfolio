@@ -4,7 +4,7 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  // SSR-friendly: Show gradient immediately, then enhance with image
+  // Critical CSS for SSR - ensure background renders immediately
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
   background-image: url('/goldenGateBridge.jpg');
   background-size: cover;
@@ -15,14 +15,8 @@
   position: relative;
   overflow: hidden;
   
-  // Smooth loading transition
-  transition: background-image 0.3s ease-in-out;
-  
-  // Enhanced state when image is loaded
-  &.hero-image-loaded {
-    // Subtle enhancement - image is now fully loaded
-    background-blend-mode: normal;
-  }
+  // Ensure background is always visible during SSR
+  background-color: #0f172a; // Fallback color
 
   @media (max-width: 1024px) and (min-width: 769px) {
     padding-top: 100px;
@@ -245,6 +239,8 @@
   border-radius: $radius-full;
   overflow: hidden;
   border: 3px solid transparent;
+  // Critical CSS for SSR - ensure photo container renders immediately
+  background-color: #f8fafc; // Light fallback color
   background: $gradient-warm;
   background-clip: padding-box;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 3px $gradient-warm;

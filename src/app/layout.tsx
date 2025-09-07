@@ -22,8 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Preload critical background image for faster loading */}
+        {/* Critical resource preloading for instant SSR rendering */}
         <link rel="preload" as="image" href="/goldenGateBridge.jpg" />
+        <link rel="preload" as="image" href="/caroline-headshot.jpg" />
         {/* Removed Font Awesome CDN for better performance */}
       </head>
       <body suppressHydrationWarning={true}>

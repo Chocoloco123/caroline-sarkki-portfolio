@@ -7,14 +7,13 @@ import Icon from '@/components/ui/icon'
 import './Hero.scss'
 
 const Hero: React.FC = () => {
-  const [imageLoaded, setImageLoaded] = useState(false)
-
+  const [isHydrated, setIsHydrated] = useState(false)
+  const heroClassName = "hero"
+  
   useEffect(() => {
-    // Preload the background image for smoother UX
-    const img = new Image()
-    img.onload = () => setImageLoaded(true)
-    img.src = '/goldenGateBridge.jpg'
+    setIsHydrated(true)
   }, [])
+  
   const socialLinks = [
     { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki-2a5517126/', icon: 'linkedin' },
     { platform: 'GitHub', url: 'https://github.com/Chocoloco123', icon: 'github' },
@@ -33,11 +32,7 @@ const Hero: React.FC = () => {
   }
 
   return (
-    <header 
-      id="home" 
-      className={`hero ${imageLoaded ? 'hero-image-loaded' : ''}`} 
-      role="banner"
-    >
+    <header id="home" className={heroClassName} role="banner">
       <div className="hero-container">
         <motion.div 
           className="hero-content"
