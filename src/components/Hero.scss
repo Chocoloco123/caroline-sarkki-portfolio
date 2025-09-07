@@ -4,14 +4,25 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
+  // SSR-friendly: Show gradient immediately, then enhance with image
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
   background-image: url('/goldenGateBridge.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: scroll;
   color: white;
   position: relative;
   overflow: hidden;
+  
+  // Smooth loading transition
+  transition: background-image 0.3s ease-in-out;
+  
+  // Enhanced state when image is loaded
+  &.hero-image-loaded {
+    // Subtle enhancement - image is now fully loaded
+    background-blend-mode: normal;
+  }
 
   @media (max-width: 1024px) and (min-width: 769px) {
     padding-top: 100px;
@@ -21,6 +32,8 @@
   @media (max-width: $breakpoint-md) {
     padding-top: 120px;
     min-height: calc(100vh - 120px);
+    // Mobile optimization: disable fixed attachment for better performance
+    background-attachment: scroll;
   }
 
   @media (max-width: $breakpoint-sm) {
