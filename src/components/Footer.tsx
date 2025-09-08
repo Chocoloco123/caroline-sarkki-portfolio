@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
       <footer className="footer">
         <div className="container">
           <div className="footer-content">
-            <p>&copy; 2024 Caroline Sarkki. All rights reserved.</p>
+            <p>&copy; 2025 Caroline Sarkki. All rights reserved.</p>
             <div className="footer-social">
               {socialLinks.map((social) => (
                 <motion.a
