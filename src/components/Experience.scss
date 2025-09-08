@@ -2,7 +2,7 @@
 
 .timeline {
   position: relative;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 
   &::before {
@@ -56,9 +56,10 @@
   padding: $spacing-xl;
   border-radius: $radius-xl;
   box-shadow: $shadow-md;
-  width: 45%;
+  width: 50%;
   margin-left: auto;
   position: relative;
+  min-height: fit-content;
 
   @media (max-width: $breakpoint-md) {
     width: calc(100% - 40px);
@@ -112,6 +113,9 @@
     color: $text-secondary;
     position: relative;
     padding-left: $spacing-lg;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 
     &::before {
       content: '▶';
@@ -119,6 +123,13 @@
       left: 0;
       color: $primary-slate;
       font-size: $font-size-xs;
+    }
+
+    // Remove any hover effects
+    &:hover {
+      color: $text-secondary;
+      transform: none;
+      background: none;
     }
   }
 }

@@ -11,16 +11,16 @@ const Experience: React.FC = () => {
     company: 'KQED',
     period: '2021 - Present',
     responsibilities: [
-      'Developed and maintained KQED\'s voter guide application',
-      'Redesigned and implemented the site\'s navigation menu system',
-      'Built and maintained various micro websites for KQED',
-      'Improved SEO performance across multiple platforms',
-      'Implemented comprehensive unit testing strategies',
-      'Provided maintenance and upgrades for backend APIs and services',
-      'Revamped user accounts and login flow systems',
-      'Mentored engineering interns and reviewed their technical work',
-      'Led technical discussions for engineers and non-engineers',
-      'Oversaw system documentation and site cleanup initiatives'
+      'Voter Guide: Developed and maintained KQED\'s voter guide application',
+      'Navigation System Redesign: Completely reinvented the site\'s navigation menu system',
+      'Micro Websites: Built and maintained various micro websites for KQED',
+      'SEO Optimization: Improved SEO performance across multiple platforms',
+      'Unit Testing: Implemented comprehensive unit testing strategies',
+      'Backend Maintenance: Provided maintenance and upgrades for backend APIs and services',
+      'User Account Management: Revamped user accounts and login flow systems',
+      'Mentoring: Mentored engineering interns and reviewed their technical work',
+      'Technical Leadership: Led technical discussions for engineers and non-engineers',
+      'Documentation: Oversaw system documentation and site cleanup initiatives'
     ]
   }
 

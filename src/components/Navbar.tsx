@@ -39,11 +39,8 @@ const Navbar: React.FC = () => {
   }
 
   return (
-    <motion.nav 
+    <nav 
       className={`navbar ${isScrolled ? 'scrolled' : ''}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
       role="navigation"
       aria-label="Main navigation"
       id="navigation"
@@ -86,7 +83,7 @@ const Navbar: React.FC = () => {
           <span className="bar" aria-hidden="true"></span>
         </button>
       </div>
-    </motion.nav>
+    </nav>
   )
 }
 

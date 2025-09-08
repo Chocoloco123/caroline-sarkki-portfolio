@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import Icon from '@/components/ui/icon'
 import './Hero.scss'
@@ -34,32 +34,27 @@ const Hero: React.FC = () => {
   return (
     <header id="home" className={heroClassName} role="banner">
       <div className="hero-container">
-        <motion.div 
-          className="hero-content"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        >
+        <div className="hero-content">
           <h1 className="hero-title">
             Hi, I'm <span className="highlight">Caroline Sarkki</span>
           </h1>
-          
+
           <h2 className="hero-subtitle">
             Full Stack Software Engineer at KQED
           </h2>
-          
+
           <p className="hero-description">
-            Passionate developer with 3+ years of experience building scalable web applications, 
-            AI-powered tools, and mentoring engineering teams. Specializing in React, TypeScript, JavaScript, 
+            Passionate developer with 3+ years of experience building scalable web applications,
+            AI-powered tools, and mentoring engineering teams. Specializing in React, TypeScript, JavaScript, Python, Java,
             OpenAI API integration, and full-stack development in the San Francisco Bay Area.
           </p>
-          
-          <div 
+
+          <div
             className="hero-buttons"
             role="group"
             aria-label="Main action buttons"
           >
-            <Button 
+            <Button
               variant="default"
               size="lg"
               onClick={() => scrollToSection('#projects')}
@@ -67,7 +62,7 @@ const Hero: React.FC = () => {
             >
               View My Work
             </Button>
-            <Button 
+            <Button
               variant="secondary"
               size="lg"
               onClick={() => scrollToSection('#contact')}
@@ -76,8 +71,8 @@ const Hero: React.FC = () => {
               Get In Touch
             </Button>
           </div>
-          
-          <div 
+
+          <div
             className="hero-social"
             role="group"
             aria-label="Social media links"
@@ -96,16 +91,20 @@ const Hero: React.FC = () => {
               </a>
             ))}
           </div>
-        </motion.div>
-        
+        </div>
+
         <div className="hero-image">
           <div className="hero-image-container">
-            <img 
-              src="/caroline-headshot.jpg" 
+            <Image
+              src="/caroline-headshot.jpg"
               alt="Caroline Sarkki - Full Stack Software Engineer"
               className="hero-photo"
-              loading="eager"
-              decoding="async"
+              width={300}
+              height={300}
+              priority
+              quality={90}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 console.error('Headshot failed to load:', target.src);

@@ -15,8 +15,8 @@
   position: relative;
   overflow: hidden;
   
-  // Ensure background is always visible during SSR
-  background-color: #0f172a; // Fallback color
+  // Ensure background is always visible during SSR - use warmer fallback
+  background-color: #1e293b; // Warmer fallback color to reduce blue flash
 
   @media (max-width: 1024px) and (min-width: 769px) {
     padding-top: 100px;
@@ -240,8 +240,9 @@
   overflow: hidden;
   border: 3px solid transparent;
   // Critical CSS for SSR - ensure photo container renders immediately
-  background-color: #f8fafc; // Light fallback color
-  background: $gradient-warm;
+  // Use a warmer, more neutral fallback that matches the photo better
+  background-color: #f1f5f9; // Light warm gray fallback
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
   background-clip: padding-box;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 3px $gradient-warm;
   backdrop-filter: blur(8px);
