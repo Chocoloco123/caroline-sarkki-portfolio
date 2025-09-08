@@ -4,6 +4,7 @@ import './globals.css'
 import './globals.scss'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://carolinesarkki.dev'),
   title: {
     default: 'Caroline Sarkki - Full Stack Software Engineer | Portfolio',
     template: '%s | Caroline Sarkki'
@@ -153,7 +154,7 @@ export default function RootLayout({
         {/* Additional SEO meta tags */}
         <meta name="theme-color" content="#0f172a" />
         <meta name="msapplication-TileColor" content="#0f172a" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="format-detection" content="telephone=no" />
         
