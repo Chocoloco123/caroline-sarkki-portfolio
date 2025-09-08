@@ -50,7 +50,7 @@ const Hero: React.FC = () => {
           
           <p className="hero-description">
             Passionate developer with 3+ years of experience building scalable web applications, 
-            AI-powered tools, and mentoring engineering teams. Specializing in React, JavaScript, 
+            AI-powered tools, and mentoring engineering teams. Specializing in React, TypeScript, JavaScript, 
             OpenAI API integration, and full-stack development in the San Francisco Bay Area.
           </p>
           

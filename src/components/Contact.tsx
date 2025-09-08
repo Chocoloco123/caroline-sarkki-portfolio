@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 import { ContactFormData, SocialLink } from '../types'
@@ -17,6 +17,17 @@ const Contact: React.FC = () => {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
+
+  // Auto-dismiss notification after 5 seconds
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => {
+        setNotification(null)
+      }, 5000) // 5 seconds
+
+      return () => clearTimeout(timer)
+    }
+  }, [notification])
 
   const socialLinks: SocialLink[] = [
     { platform: 'Email', url: 'mailto:csarkki.swe@gmail.com', icon: 'envelope' },
@@ -54,6 +65,7 @@ const Contact: React.FC = () => {
           subject: formData.subject,
           message: formData.message,
           to_email: 'csarkki.swe@gmail.com', // Your email address
+          reply_to: formData.email, // This will set the Reply-To header
         },
         publicKey
       )
@@ -218,8 +230,18 @@ const Contact: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
+            role="alert"
+            aria-live="polite"
           >
-            {notification.message}
+            <span>{notification.message}</span>
+            <button
+              onClick={() => setNotification(null)}
+              className="notification-close"
+              aria-label="Close notification"
+              type="button"
+            >
+              <Icon name="times" size={16} />
+            </button>
           </motion.div>
         )}
       </div>

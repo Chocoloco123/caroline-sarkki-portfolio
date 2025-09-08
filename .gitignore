@@ -86,3 +86,16 @@ jspm_packages/
 # Temporary folders
 tmp/
 temp/
+
+# Documentation files (except main README.md)
+*_SETUP.md
+*_GUIDE.md
+*_DEPLOYMENT.md
+ACCESSIBILITY_GUIDE.md
+SEO_GUIDE.md
+EMAILJS_SETUP.md
+CHAT_SETUP.md
+CONTACT_FORM_SETUP.md
+BACKGROUND_SETUP.md
+RAILWAY_DEPLOYMENT.md
+VERCEL_DEPLOYMENT.md

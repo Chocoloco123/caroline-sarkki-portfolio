@@ -33,6 +33,15 @@ const Chat: React.FC = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setIsOpen(false)
+    } else if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      sendMessage()
+    }
+  }
+
   useEffect(() => {
     scrollToBottom()
   }, [messages])
@@ -192,7 +201,12 @@ const Chat: React.FC = () => {
               </div>
             </div>
 
-            <div className="chat-messages">
+            <div 
+              className="chat-messages"
+              role="log"
+              aria-live="polite"
+              aria-label="Chat messages"
+            >
               {messages.map((message) => (
                 <motion.div
                   key={message.id}
@@ -200,13 +214,18 @@ const Chat: React.FC = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
+                  role="article"
+                  aria-label={`Message from ${message.sender === 'user' ? 'you' : 'Clio'} at ${message.timestamp.toLocaleTimeString()}`}
                 >
                   <div className="message-content">
                     <div 
                       dangerouslySetInnerHTML={{ __html: message.text }}
                       className="message-text"
                     />
-                    <span className="message-time">
+                    <span 
+                      className="message-time"
+                      aria-label={`Sent at ${message.timestamp.toLocaleTimeString()}`}
+                    >
                       {message.timestamp.toLocaleTimeString([], { 
                         hour: '2-digit', 
                         minute: '2-digit' 
@@ -242,10 +261,12 @@ const Chat: React.FC = () => {
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
+                  onKeyDown={handleKeyDown}
                   placeholder="Ask Clio about Caroline's work..."
                   disabled={isLoading}
-                  aria-label="Type your message"
+                  aria-label="Type your message to Clio"
+                  aria-describedby="chat-instructions"
+                  maxLength={500}
                 />
                 <Button
                   onClick={sendMessage}
@@ -253,9 +274,16 @@ const Chat: React.FC = () => {
                   size="sm"
                   className="send-button"
                   aria-label="Send message"
+                  aria-describedby="send-button-desc"
                 >
                   <Icon name="paper-plane" size={16} />
                 </Button>
+              </div>
+              <div id="chat-instructions" className="sr-only">
+                Press Enter to send your message, or Escape to close the chat.
+              </div>
+              <div id="send-button-desc" className="sr-only">
+                Send your message to Clio
               </div>
             </div>
           </motion.div>

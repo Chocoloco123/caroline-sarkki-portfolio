@@ -101,13 +101,17 @@ const Projects: React.FC = () => {
         viewport={{ once: true, margin: "-50px" }}
         whileHover={{ y: -5 }}
       >
-        <Card className="project-card h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/95 backdrop-blur-sm p-2">
+        <Card 
+          className="project-card h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/95 backdrop-blur-sm p-2"
+          role="article"
+          aria-labelledby={`project-title-${project.id}`}
+        >
           <CardHeader className="text-center px-8 pb-4">
           <div className={`project-image mx-auto mb-6 ${shouldShowImage ? 'project-image-screenshot' : 'project-image-icon'}`} aria-hidden="true">
             {shouldShowImage ? (
               <img 
                 src={project.screenshot} 
-                alt={`${project.title} screenshot`}
+                alt={`Screenshot of ${project.title} project showing the user interface and functionality`}
                 className=""
                 onError={() => handleImageError(project.id)}
                 onLoad={() => {
@@ -118,15 +122,24 @@ const Projects: React.FC = () => {
                     return newSet
                   })
                 }}
+                loading="lazy"
               />
             ) : (
-              <Icon name={project.icon} size={32} />
+              <Icon name={project.icon} size={32} aria-label={`${project.title} project icon`} />
             )}
           </div>
-            <CardTitle className="text-xl font-bold text-slate-800">{project.title}</CardTitle>
+            <CardTitle 
+              id={`project-title-${project.id}`}
+              className="text-xl font-bold text-slate-800"
+            >
+              {project.title}
+            </CardTitle>
           </CardHeader>
         <CardContent className="text-center px-8 pt-0">
-          <CardDescription className="text-slate-600 mb-6 leading-relaxed">
+          <CardDescription 
+            id={`project-desc-${project.id}`}
+            className="text-slate-600 mb-6 leading-relaxed"
+          >
             {project.description}
           </CardDescription>
           <div className="project-tech flex flex-wrap justify-center gap-2 mb-6" role="list" aria-label="Technologies used">
@@ -145,8 +158,9 @@ const Projects: React.FC = () => {
             href={project.link} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="project-link inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-semibold transition-colors"
-            aria-label={`View ${project.title} project`}
+            className="project-link inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
+            aria-label={`View ${project.title} project (opens in new tab)`}
+            aria-describedby={`project-desc-${project.id}`}
           >
             View Project <i className="fas fa-external-link-alt" aria-hidden="true"></i>
           </a>
@@ -177,8 +191,18 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-2xl font-semibold text-white mb-6 text-center">Professional Work at KQED</h3>
-          <div className="projects-grid mb-16">
+          <h3 
+            id="professional-projects-heading"
+            className="text-2xl font-semibold text-white mb-6 text-center"
+          >
+            Professional Work at KQED
+          </h3>
+          <div 
+            className="projects-grid mb-16"
+            role="grid"
+            aria-labelledby="professional-projects-heading"
+            aria-label="Professional projects grid"
+          >
             {professionalProjects.map((project, index) => renderProjectCard(project, index))}
           </div>
         </motion.div>
@@ -190,8 +214,18 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-2xl font-semibold text-white mb-6 text-center">Personal Projects</h3>
-          <div className="projects-grid">
+          <h3 
+            id="personal-projects-heading"
+            className="text-2xl font-semibold text-white mb-6 text-center"
+          >
+            Personal Projects
+          </h3>
+          <div 
+            className="projects-grid"
+            role="grid"
+            aria-labelledby="personal-projects-heading"
+            aria-label="Personal projects grid"
+          >
             {personalProjects.map((project, index) => renderProjectCard(project, index))}
           </div>
         </motion.div>

@@ -55,9 +55,10 @@ const Skills: React.FC = () => {
   ]
 
   return (
-    <section id="skills" className="skills">
+    <section id="skills" className="skills" aria-labelledby="skills-heading">
       <div className="container">
         <motion.h2 
+          id="skills-heading"
           className="section-title"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -67,7 +68,7 @@ const Skills: React.FC = () => {
           Technical Skills
         </motion.h2>
         
-        <div className="skills-grid">
+        <div className="skills-grid" role="list" aria-label="Technical skills categories">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
@@ -76,9 +77,15 @@ const Skills: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.2 }}
               viewport={{ once: true }}
+              role="listitem"
             >
-              <h3>{category.title}</h3>
-              <div className="skill-items">
+              <h3 id={`category-${categoryIndex}`}>{category.title}</h3>
+              <div 
+                className="skill-items"
+                role="list"
+                aria-labelledby={`category-${categoryIndex}`}
+                aria-label={`${category.title} skills`}
+              >
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
@@ -87,9 +94,18 @@ const Skills: React.FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: skillIndex * 0.1 }}
                     viewport={{ once: true }}
+                    role="listitem"
                   >
                     <span className="skill-name">{skill.name}</span>
-                    <div className="skill-bar">
+                    <div 
+                      className="skill-bar"
+                      role="progressbar"
+                      aria-valuenow={skill.level}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-label={`${skill.name} skill level: ${skill.level}%`}
+                      aria-describedby={`skill-desc-${skill.name.replace(/\s+/g, '-').toLowerCase()}`}
+                    >
                       <motion.div
                         className="skill-progress"
                         initial={{ width: 0 }}
@@ -98,6 +114,12 @@ const Skills: React.FC = () => {
                         viewport={{ once: true }}
                       />
                     </div>
+                    <span 
+                      id={`skill-desc-${skill.name.replace(/\s+/g, '-').toLowerCase()}`}
+                      className="sr-only"
+                    >
+                      {skill.level}% proficiency in {skill.name}
+                    </span>
                   </motion.div>
                 ))}
               </div>
