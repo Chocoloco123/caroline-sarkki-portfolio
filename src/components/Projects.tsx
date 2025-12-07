@@ -183,7 +183,7 @@ const Projects: React.FC = () => {
         >
           Featured Projects
         </motion.h2>
-        
+
         {/* Professional Projects */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -191,13 +191,13 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <h3 
+          <h3
             id="professional-projects-heading"
-            className="text-2xl font-semibold text-white mb-6 text-center"
+            className="text-2xl mb-20 text-center"
           >
             Professional Work at KQED
           </h3>
-          <div 
+          <div
             className="projects-grid mb-16"
             role="grid"
             aria-labelledby="professional-projects-heading"
@@ -214,13 +214,13 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <h3 
+          <h3
             id="personal-projects-heading"
-            className="text-2xl font-semibold text-white mb-6 text-center"
+            className="text-2xl mb-20 text-center"
           >
             Personal Projects
           </h3>
-          <div 
+          <div
             className="projects-grid"
             role="grid"
             aria-labelledby="personal-projects-heading"

@@ -14,6 +14,13 @@
   }
 }
 
+#professional-projects-heading, #personal-projects-heading {
+  margin-bottom: $spacing-md;
+  margin-top: $spacing-xl;
+  color: $text-muted;
+  font-weight: $font-weight-semibold;
+}
+
 .project-card {
   background: white;
   border-radius: $radius-xl;
