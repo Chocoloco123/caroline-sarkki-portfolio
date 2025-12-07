@@ -56,32 +56,13 @@
   padding: $spacing-xl;
   border-radius: $radius-xl;
   box-shadow: $shadow-md;
-  width: 50%;
-  margin-left: auto;
+  width: calc(50% - 40px);
   position: relative;
   min-height: fit-content;
 
   @media (max-width: $breakpoint-md) {
-    width: calc(100% - 40px);
-    margin-left: 40px;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: -10px;
-    top: 20px;
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid white;
-
-    @media (max-width: $breakpoint-md) {
-      left: -10px;
-      border-right: 10px solid white;
-      border-left: none;
-    }
+    width: calc(100% - 80px);
+    margin-left: 80px;
   }
 
   h3 {
@@ -96,6 +77,15 @@
     color: $primary-slate;
     margin-bottom: $spacing-sm;
   }
+}
+
+.timeline-content-right {
+  margin-left: calc(50% + 40px);
+}
+
+.timeline-content-left {
+  margin-right: calc(50% + 40px);
+  margin-left: 0;
 }
 
 .timeline-date {
