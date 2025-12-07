@@ -44,9 +44,7 @@ const Hero: React.FC = () => {
           </h2>
 
           <p className="hero-description">
-            Passionate developer with 3+ years of experience building scalable web applications,
-            AI-powered tools, and mentoring engineering teams. Specializing in React, TypeScript, JavaScript, Python, Java,
-            OpenAI API integration, and full-stack development in the San Francisco Bay Area.
+            I build intuitive interfaces, solid backend systems, and sprinkle in AI features whenever they make life easier. I care a lot about clarity—both in the products I create and the code that powers them.
           </p>
 
           <div
