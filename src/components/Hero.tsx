@@ -9,11 +9,11 @@ import './Hero.scss'
 const Hero: React.FC = () => {
   const [isHydrated, setIsHydrated] = useState(false)
   const heroClassName = "hero"
-  
+
   useEffect(() => {
     setIsHydrated(true)
   }, [])
-  
+
   const socialLinks = [
     { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki-2a5517126/', icon: 'linkedin' },
     { platform: 'GitHub', url: 'https://github.com/Chocoloco123', icon: 'github' },
