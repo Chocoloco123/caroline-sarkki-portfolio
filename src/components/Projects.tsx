@@ -55,6 +55,15 @@ const Projects: React.FC = () => {
 
   const personalProjects: Project[] = [
     {
+      id: 'crittr',
+      title: 'Crittr',
+      description: 'An AI-powered pet care platform built with Next.js & FastAPI. Features intelligent chatbot, health tracking, digital journaling, and Google OAuth. Deployed on Railway + Vercel with PostgreSQL database. Helping pet parents create lasting memories while monitoring their furry friends\' wellbeing.',
+      technologies: ['Next.js', 'FastAPI', 'PostgreSQL', 'TypeScript', 'Redux', 'Google OAuth', 'OpenAI API'],
+      link: 'https://crittr-app.vercel.app/',
+      icon: 'user-cog',
+      screenshot: '/projects/personal/crittr.png'
+    },
+    {
       id: 'ai-note-app',
       title: 'AI-Powered Note Taking App',
       description: 'Built a sophisticated note-taking application that leverages OpenAI API for intelligent summarization. Features include smart categorization, automatic summaries, and search functionality.',
@@ -101,7 +110,7 @@ const Projects: React.FC = () => {
         viewport={{ once: true, margin: "-50px" }}
         whileHover={{ y: -5 }}
       >
-        <Card 
+        <Card
           className="project-card h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/95 backdrop-blur-sm p-2"
           role="article"
           aria-labelledby={`project-title-${project.id}`}
@@ -109,8 +118,8 @@ const Projects: React.FC = () => {
           <CardHeader className="text-center px-8 pb-4">
           <div className={`project-image mx-auto mb-6 ${shouldShowImage ? 'project-image-screenshot' : 'project-image-icon'}`} aria-hidden="true">
             {shouldShowImage ? (
-              <img 
-                src={project.screenshot} 
+              <img
+                src={project.screenshot}
                 alt={`Screenshot of ${project.title} project showing the user interface and functionality`}
                 className=""
                 onError={() => handleImageError(project.id)}
@@ -128,7 +137,7 @@ const Projects: React.FC = () => {
               <Icon name={project.icon} size={32} aria-label={`${project.title} project icon`} />
             )}
           </div>
-            <CardTitle 
+            <CardTitle
               id={`project-title-${project.id}`}
               className="text-xl font-bold text-slate-800"
             >
@@ -136,7 +145,7 @@ const Projects: React.FC = () => {
             </CardTitle>
           </CardHeader>
         <CardContent className="text-center px-8 pt-0">
-          <CardDescription 
+          <CardDescription
             id={`project-desc-${project.id}`}
             className="text-slate-600 mb-6 leading-relaxed"
           >
@@ -144,20 +153,20 @@ const Projects: React.FC = () => {
           </CardDescription>
           <div className="project-tech flex flex-wrap justify-center gap-2 mb-6" role="list" aria-label="Technologies used">
             {project.technologies.map((tech) => (
-              <Badge 
-                key={tech} 
-                variant="secondary" 
-                className="bg-slate-100 text-slate-700 hover:bg-slate-200 border-slate-200 font-medium"
+              <Badge
+                key={tech}
+                variant="secondary"
+                className="bg-slate-100 text-slate-700 hover:bg-slate-200 border-slate-200 font-medium px-6 py-2.5"
                 role="listitem"
               >
                 {tech}
               </Badge>
             ))}
           </div>
-          <a 
-            href={project.link} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
             className="project-link inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
             aria-label={`View ${project.title} project (opens in new tab)`}
             aria-describedby={`project-desc-${project.id}`}
@@ -173,7 +182,7 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="projects" aria-labelledby="projects-heading">
       <div className="container">
-        <motion.h2 
+        <motion.h2
           id="projects-heading"
           className="section-title"
           initial={{ opacity: 0, y: 30 }}
@@ -183,7 +192,7 @@ const Projects: React.FC = () => {
         >
           Featured Projects
         </motion.h2>
-        
+
         {/* Professional Projects */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -191,13 +200,13 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <h3 
+          <h3
             id="professional-projects-heading"
-            className="text-2xl font-semibold text-white mb-6 text-center"
+            className="text-2xl mb-20 text-center"
           >
             Professional Work at KQED
           </h3>
-          <div 
+          <div
             className="projects-grid mb-16"
             role="grid"
             aria-labelledby="professional-projects-heading"
@@ -214,13 +223,13 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <h3 
+          <h3
             id="personal-projects-heading"
-            className="text-2xl font-semibold text-white mb-6 text-center"
+            className="text-2xl mb-20 text-center"
           >
             Personal Projects
           </h3>
-          <div 
+          <div
             className="projects-grid"
             role="grid"
             aria-labelledby="personal-projects-heading"

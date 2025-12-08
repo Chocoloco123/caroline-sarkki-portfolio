@@ -69,17 +69,14 @@ const Contact: React.FC = () => {
         },
         publicKey
       )
-
-      console.log('Email sent successfully:', result.text)
       
       setNotification({ message: 'Message sent successfully! I\'ll get back to you soon.', type: 'success' })
       setFormData({ name: '', email: '', subject: '', message: '' })
-      
+
     } catch (error) {
-      console.error('EmailJS error:', error)
-      setNotification({ 
-        message: 'Sorry, there was an error sending your message. Please try again or contact me directly at csarkki.swe@gmail.com', 
-        type: 'error' 
+      setNotification({
+        message: 'Sorry, there was an error sending your message. Please try again or contact me directly at csarkki.swe@gmail.com',
+        type: 'error'
       })
     } finally {
       setIsSubmitting(false)
@@ -89,7 +86,7 @@ const Contact: React.FC = () => {
   return (
     <section id="contact" className="contact" aria-labelledby="contact-heading">
       <div className="container">
-        <motion.h2 
+        <motion.h2
           id="contact-heading"
           className="section-title"
           initial={{ opacity: 0, y: 30 }}
@@ -99,9 +96,9 @@ const Contact: React.FC = () => {
         >
           Get In Touch
         </motion.h2>
-        
+
         <div className="contact-content">
-          <motion.div 
+          <motion.div
             className="contact-info"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -110,7 +107,7 @@ const Contact: React.FC = () => {
           >
             <h3>Let's Connect</h3>
             <p>
-              I'm always interested in discussing new opportunities, 
+              I'm always interested in discussing new opportunities,
               collaborating on projects, or just having a chat about technology.
             </p>
             <div className="contact-details">
@@ -128,8 +125,8 @@ const Contact: React.FC = () => {
               </div>
             </div>
           </motion.div>
-          
-          <motion.form 
+
+          <motion.form
             className="contact-form"
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 50 }}
@@ -139,7 +136,7 @@ const Contact: React.FC = () => {
             aria-labelledby="contact-heading"
             noValidate
           >
-            
+
             <div className="form-group">
               <label htmlFor="name" className="sr-only">Your Name</label>
               <input
@@ -208,8 +205,8 @@ const Contact: React.FC = () => {
                 Message is required
               </div>
             </div>
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               variant="default"
               size="lg"
               className="w-full"
@@ -223,7 +220,7 @@ const Contact: React.FC = () => {
             </div>
           </motion.form>
         </div>
-        
+
         {notification && (
           <motion.div
             className={`notification notification-${notification.type}`}

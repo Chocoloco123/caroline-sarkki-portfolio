@@ -17,7 +17,7 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  
+
   &:hover {
     box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
     transform: translateY(-2px);
@@ -198,7 +198,7 @@
   flex: 1;
   padding: 20px;
   overflow-y: auto;
-  overflow-x: visible;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -208,26 +208,32 @@
   overflow-wrap: break-word;
   min-width: 0;
   width: 100%;
-  max-height: 70vh;
+  min-height: 0;
 
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent;
+    background: #f1f5f9;
+    border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
     background: #cbd5e1;
-    border-radius: 2px;
+    border-radius: 3px;
+
+    &:hover {
+      background: #94a3b8;
+    }
   }
 
   .message {
     display: flex;
-    max-width: 80%;
+    max-width: 85%;
     min-width: 0;
-    width: 100%;
+    flex-shrink: 0;
+    width: fit-content;
 
     &.user {
       align-self: flex-end;
@@ -258,12 +264,13 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       overflow-wrap: break-word;
       word-wrap: break-word;
-      max-width: 100%;
-      overflow: hidden;
       word-break: break-word;
       hyphens: auto;
       min-width: 0;
+      max-width: 100%;
       width: 100%;
+      box-sizing: border-box;
+      display: block;
 
       p {
         margin: 0;
@@ -274,14 +281,16 @@
 
       .message-text {
         font-size: 14px;
-        line-height: 1.4;
+        line-height: 1.6;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        max-width: 100%;
-        overflow: hidden;
         word-break: break-word;
         hyphens: auto;
         width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        display: block;
+        min-width: 0;
 
         // Style formatted content from backend
         p {
@@ -304,23 +313,34 @@
 
         ul, ol {
           margin: 8px 0;
-          padding-left: 20px;
+          padding-left: 24px;
           list-style: disc;
+          max-width: 100%;
+          width: 100%;
+          box-sizing: border-box;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
         }
-        
+
         ul {
           list-style-type: disc;
         }
-        
+
         ol {
           list-style-type: decimal;
         }
 
         li {
           margin: 4px 0;
-          line-height: 1.4;
+          line-height: 1.6;
           display: list-item;
-          list-style-position: outside;
+          list-style-position: inside;
+          max-width: 100%;
+          width: 100%;
+          box-sizing: border-box;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          word-break: break-word;
         }
 
         strong {
@@ -367,31 +387,12 @@
           flex-wrap: wrap;
           gap: 6px;
           margin: 8px 0;
-
-          // .skill-tag {
-          //   background: #f1f5f9;
-          //   color: #475569;
-          //   padding: 4px 8px;
-          //   border-radius: 12px;
-          //   font-size: 12px;
-          //   font-weight: 500;
-          //   border: 1px solid #e2e8f0;
-          //   white-space: nowrap;
-          //   display: inline-block;
-          //   margin: 2px 4px 2px 0;
-          //   transition: all 0.2s ease;
-          //   
-          //   &:hover {
-          //     background: #e2e8f0;
-          //     transform: translateY(-1px);
-          //   }
-          // }
         }
 
         // Style nested lists with skills as pills
         ul ul li {
           margin: 2px 4px 2px 0;
-          
+
           code {
             background: #f1f5f9;
             color: #475569;
@@ -450,7 +451,7 @@
           display: flex;
           flex-wrap: wrap;
           gap: 6px;
-          
+
           .skill-item {
             background: #f1f5f9;
             color: #475569;
@@ -467,7 +468,7 @@
         // Ensure proper spacing for skill categories
         .skill-category {
           margin: 12px 0;
-          
+
           strong {
             display: inline-block;
             margin-right: 8px;
@@ -476,7 +477,7 @@
             vertical-align: top;
             line-height: 1.4;
           }
-          
+
           // Style the skills that follow the category name
           > *:not(strong) {
             display: inline-block;
@@ -484,52 +485,7 @@
           }
         }
 
-        // Handle skills in paragraph text (disabled)
-        // p {
-        //   .skill-tag {
-        //     margin: 2px 4px 2px 0;
-        //   }
-        // }
 
-        // Skill pill styling disabled for cleaner text display
-        // .skill-tag {
-        //   // Override any conflicting styles
-        //   background: #f1f5f9 !important;
-        //   color: #475569 !important;
-        //   padding: 4px 8px !important;
-        //   border-radius: 12px !important;
-        //   font-size: 12px !important;
-        //   font-weight: 500 !important;
-        //   border: 1px solid #e2e8f0 !important;
-        //   white-space: nowrap !important;
-        //   display: inline-block !important;
-        //   margin: 2px 4px 2px 0 !important;
-        //   transition: all 0.2s ease !important;
-        //   vertical-align: middle !important;
-        //   max-width: none !important;
-        //   word-break: normal !important;
-        //   overflow: visible !important;
-        //   text-overflow: unset !important;
-        //   
-        //   &:hover {
-        //     background: #e2e8f0 !important;
-        //     transform: translateY(-1px) !important;
-        //   }
-        // }
-
-        // Skill pill related styling disabled for cleaner text display
-        // .skill-tag + * {
-        //   vertical-align: middle !important;
-        //   margin-left: 4px !important;
-        // }
-
-        // .skill-description {
-        //   color: #64748b !important;
-        //   font-size: 11px !important;
-        //   font-style: italic !important;
-        //   vertical-align: middle !important;
-        //   margin-left: 4px !important;
-        // }
 
         // Handle inline elements and spans that might be skill tags
         span {
@@ -545,13 +501,28 @@
           max-width: 100%;
         }
 
-        // Ensure all text content wraps properly
-        p, div, li {
+        // Ensure all text content wraps properly and respects container
+        p, div, li, ul, ol, h1, h2, h3, h4, h5, h6 {
           overflow-wrap: break-word !important;
           word-wrap: break-word !important;
           word-break: break-word !important;
           max-width: 100% !important;
           hyphens: auto !important;
+          box-sizing: border-box !important;
+          min-width: 0 !important;
+        }
+
+        // Ensure all content respects container bounds
+        * {
+          max-width: 100%;
+          box-sizing: border-box;
+          min-width: 0;
+        }
+
+        // Prevent any element from overflowing
+        ul, ol {
+          width: 100%;
+          max-width: 100%;
         }
 
         // Ensure skill containers wrap properly
@@ -575,21 +546,27 @@
 
         // Fix alignment issues with skill text and parentheses
         li {
-          display: flex;
-          align-items: flex-start;
-          flex-wrap: wrap;
-          gap: 6px;
+          display: list-item;
+          list-style-position: inside;
+          max-width: 100%;
+          width: 100%;
+          box-sizing: border-box;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          word-break: break-word;
           margin: 8px 0;
-          
+
           // Style any text that appears after skill names
           text {
             display: inline;
           }
-          
+
           // Handle parentheses and additional text
           span, em, strong {
             display: inline;
             vertical-align: baseline;
+            max-width: 100%;
+            box-sizing: border-box;
           }
         }
 
@@ -604,21 +581,26 @@
 
         // Ensure skills align properly with their section headers
         li:has(strong) {
-          display: flex;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 6px;
-          
+          display: list-item;
+          list-style-position: inside;
+          max-width: 100%;
+          width: 100%;
+          box-sizing: border-box;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          word-break: break-word;
+
           // Make sure the strong element (section header) doesn't wrap
           strong {
-            flex-shrink: 0;
-            white-space: nowrap;
+            display: inline;
+            margin-right: 8px;
             margin-bottom: 0;
           }
-          
+
           // Style any content that follows the strong element
           > *:not(strong) {
-            vertical-align: middle;
+            display: inline;
+            vertical-align: baseline;
           }
         }
 
@@ -627,11 +609,19 @@
           line-height: 1.6;
           margin: 6px 0;
           display: list-item;
-          list-style-position: outside;
-          
+          list-style-position: inside;
+          max-width: 100%;
+          width: 100%;
+          box-sizing: border-box;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          word-break: break-word;
+
           // Make sure all text within list items is properly aligned
           * {
             vertical-align: baseline;
+            max-width: 100%;
+            box-sizing: border-box;
           }
         }
 
@@ -639,14 +629,17 @@
         ul li, ol li {
           // If the list item contains a strong element (section header)
           &:has(strong) {
-            display: flex;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 6px;
-            
+            display: list-item;
+            list-style-position: inside;
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+
             strong {
-              flex-shrink: 0;
-              white-space: nowrap;
+              display: inline;
               margin-right: 8px;
             }
           }
@@ -657,13 +650,13 @@
           // Reset any conflicting styles
           font-size: 14px;
           line-height: 1.4;
-          
+
           // Ensure all child elements inherit proper alignment
           > * {
             vertical-align: baseline;
             display: inline;
           }
-          
+
           // Handle any text that appears inline with skill names
           text, span, em, strong {
             display: inline;
@@ -797,7 +790,7 @@
 
     .chat-icon {
       font-size: 24px;
-      
+
       svg {
         width: 24px;
         height: 24px;
@@ -870,40 +863,40 @@
       word-wrap: break-word;
       overflow-wrap: break-word;
       max-width: 100%;
-      
+
       // Remove hover effects for better UX
       &:hover {
         color: #3b82f6;
         text-decoration: underline;
       }
-      
+
       // Style email links specifically
       &[href^="mailto:"] {
         color: #059669;
         font-weight: 500;
-        
+
         &:hover {
           color: #059669;
         }
       }
-      
+
       // Style external links
       &[href^="http"] {
         color: #7c3aed;
-        
+
         &:hover {
           color: #7c3aed;
         }
       }
     }
-    
+
     // Style email addresses even if not wrapped in <a> tags
     // This will catch email addresses that appear as plain text
     *:contains("@") {
       color: #059669;
       font-weight: 500;
       cursor: pointer;
-      
+
       &:hover {
         color: #059669;
         text-decoration: none;

@@ -14,6 +14,13 @@
   }
 }
 
+#professional-projects-heading, #personal-projects-heading {
+  margin-bottom: $spacing-md;
+  margin-top: $spacing-xl;
+  color: $text-muted;
+  font-weight: $font-weight-semibold;
+}
+
 .project-card {
   background: white;
   border-radius: $radius-xl;
@@ -21,6 +28,15 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: all $transition-normal;
   border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+
+  // Make CardContent flex to push link to bottom
+  > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
 
   &:hover {
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
@@ -108,7 +124,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: $spacing-sm;
+  margin-top: $spacing-md;
   margin-bottom: $spacing-lg;
+
+  // Override badge padding for elegant spacing
+  > * {
+    padding: 0.4375rem 1rem !important; // py-1.75 px-4
+  }
 }
 
 .tech-tag {
@@ -131,10 +153,13 @@
   color: $primary-slate;
   text-decoration: none;
   font-weight: $font-weight-semibold;
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: $spacing-sm;
   transition: color $transition-normal;
+  margin-top: auto;
+  align-self: center;
 
   &:hover {
     color: $primary-slate-dark;

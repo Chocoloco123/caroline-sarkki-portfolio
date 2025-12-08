@@ -6,8 +6,23 @@ import { Stat } from '../types'
 import './About.scss'
 
 const About: React.FC = () => {
+  // Calculate years of experience since June 2022
+  const calculateYearsOfExperience = (): string => {
+    const startDate = new Date(2022, 5, 1) // June 2022 (month is 0-indexed)
+    const currentDate = new Date()
+    const yearsDiff = currentDate.getFullYear() - startDate.getFullYear()
+    const monthsDiff = currentDate.getMonth() - startDate.getMonth()
+
+    // If we're past June, add 1 to the year count
+    const totalYears = monthsDiff >= 0 ? yearsDiff : yearsDiff - 1
+
+    return `${totalYears}+`
+  }
+
+  const yearsOfExperience = calculateYearsOfExperience()
+
   const stats: Stat[] = [
-    { value: '3+', label: 'Years Experience' },
+    { value: yearsOfExperience, label: 'Years Experience' },
     { value: '10+', label: 'Projects Completed' },
     { value: '4', label: 'Interns Mentored' },
     { value: '100%', label: 'Passion for Code' }
@@ -16,7 +31,7 @@ const About: React.FC = () => {
   return (
     <section id="about" className="about" aria-labelledby="about-heading">
       <div className="container">
-        <motion.h2 
+        <motion.h2
           id="about-heading"
           className="section-title"
           initial={{ opacity: 0, y: 20 }}
@@ -26,9 +41,9 @@ const About: React.FC = () => {
         >
           About Me
         </motion.h2>
-        
+
         <div className="about-content">
-          <motion.div 
+          <motion.div
             className="about-text"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -36,28 +51,27 @@ const About: React.FC = () => {
             viewport={{ once: true }}
           >
             <p>
-              I'm a dedicated Full Stack Software Engineer currently working at KQED, where I've spent 
-              over 3 years contributing to meaningful projects that serve the community. My work spans 
-              across frontend development, backend API maintenance, and technical leadership.
+              I'm a full-stack engineer at KQED who loves building things that are useful, accessible, and built to last. Over the past {yearsOfExperience} years, I've worked across the stack—from intuitive UIs to backend services, APIs, and cloud deployments.
             </p>
+
             <p>
-              At KQED, I've had the opportunity to work on diverse projects including the voter guide, 
-              navigation system redesign, micro websites, and user account management. I've mentored 
-              4 interns, helping them grow their technical skills in JavaScript, React, Java, Python, 
-              and database technologies including PostgreSQL and MySQL.
+              Some of my favorite projects include rebuilding full-stack components of our Membership & Account platform, designing frontend features for our Voter Guide & Election Results during the 2024 Presidential Election and the LA Times–endorsed 2022 Midterm Election, and helping our Youth Media platform achieve WCAG 2.1 AA accessibility.
             </p>
+
             <p>
-              Lately I've been building innovative AI-powered tools including a note-taking app with smart summaries, 
-              a Chrome extension for web content summarization, and an AI job search agent. I also enjoy creating 
-              interactive mini games and partnering with folks who need fast, modern websites. Teammates know me 
-              for calm problem-solving, clear communication, and code that's easy to read six months later.
+              I've also mentored four interns, teaching them how to think like engineers—not just write code.
             </p>
+
             <p>
-            When I’m not coding, you can find me exploring the Bay on weekend hikes, salsa dancing, or hanging with my golden retriever. If you’ve got a product idea or a puzzle that needs untangling, I’d love to help bring it to life.
+              Recently, I've been diving deeper into AI: building a smart note-taking app with summaries, a Chrome extension for quick web digestion, an AI job search agent, and the occasional browser mini-game. I also collaborate with people who want fast, modern websites without the hassle.
+            </p>
+
+            <p>
+              When I'm not writing code, I'm probably enjoying cozy Nintendo Switch games, checking out a Golden State Valkyries game, hiking with friends, experimenting with new tea latte recipes, or hanging out with my golden retriever—who believes he's my pair programmer.
             </p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="about-stats"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}

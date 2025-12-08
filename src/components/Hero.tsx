@@ -9,11 +9,11 @@ import './Hero.scss'
 const Hero: React.FC = () => {
   const [isHydrated, setIsHydrated] = useState(false)
   const heroClassName = "hero"
-  
+
   useEffect(() => {
     setIsHydrated(true)
   }, [])
-  
+
   const socialLinks = [
     { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki-2a5517126/', icon: 'linkedin' },
     { platform: 'GitHub', url: 'https://github.com/Chocoloco123', icon: 'github' },
@@ -44,9 +44,7 @@ const Hero: React.FC = () => {
           </h2>
 
           <p className="hero-description">
-            Passionate developer with 3+ years of experience building scalable web applications,
-            AI-powered tools, and mentoring engineering teams. Specializing in React, TypeScript, JavaScript, Python, Java,
-            OpenAI API integration, and full-stack development in the San Francisco Bay Area.
+            I build intuitive interfaces, solid backend systems, and sprinkle in AI features whenever they make life easier. I care a lot about clarity—both in the products I create and the code that powers them.
           </p>
 
           <div
@@ -107,7 +105,6 @@ const Hero: React.FC = () => {
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                console.error('Headshot failed to load:', target.src);
                 // Show placeholder if image fails to load
                 target.style.display = 'none';
                 if (target.parentElement) {

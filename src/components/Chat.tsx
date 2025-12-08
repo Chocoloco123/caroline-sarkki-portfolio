@@ -88,11 +88,13 @@ const Chat: React.FC = () => {
       })
 
       if (!response.ok) {
-        throw new Error('Failed to get response')
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+        const errorMessage = errorData.error || errorData.detail || errorData.message || `Failed to get response (${response.status})`
+        throw new Error(errorMessage)
       }
 
       const data = await response.json()
-      
+
       // Clean the response text
       const cleanResponse = (text: string) => {
         return text
@@ -105,7 +107,7 @@ const Chat: React.FC = () => {
           .replace(/\n\s*\n/g, '\n')
           .trim()
       }
-      
+
       const carolineMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: cleanResponse(data.response || data.message || "I'm sorry, I couldn't process that request right now. Please try again!"),
@@ -115,10 +117,15 @@ const Chat: React.FC = () => {
 
       setMessages(prev => [...prev, carolineMessage])
     } catch (error) {
-      console.error('Chat error:', error)
+      const errorText = error instanceof Error 
+        ? error.message 
+        : "I'm sorry, I'm having trouble connecting right now. Please try again in a moment!"
+
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: "I'm sorry, I'm having trouble connecting right now. Please try again in a moment!",
+        text: errorText.includes('Failed to get response') 
+          ? "I'm sorry, I'm having trouble connecting to the backend. Please make sure the backend server is running on port 8000."
+          : errorText,
         sender: 'caroline',
         timestamp: new Date()
       }
@@ -201,7 +208,7 @@ const Chat: React.FC = () => {
               </div>
             </div>
 
-            <div 
+            <div
               className="chat-messages"
               role="log"
               aria-live="polite"
@@ -218,23 +225,23 @@ const Chat: React.FC = () => {
                   aria-label={`Message from ${message.sender === 'user' ? 'you' : 'Clio'} at ${message.timestamp.toLocaleTimeString()}`}
                 >
                   <div className="message-content">
-                    <div 
+                    <div
                       dangerouslySetInnerHTML={{ __html: message.text }}
                       className="message-text"
                     />
-                    <span 
+                    <span
                       className="message-time"
                       aria-label={`Sent at ${message.timestamp.toLocaleTimeString()}`}
                     >
-                      {message.timestamp.toLocaleTimeString([], { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
+                      {message.timestamp.toLocaleTimeString([], {
+                        hour: '2-digit',
+                        minute: '2-digit'
                       })}
                     </span>
                   </div>
                 </motion.div>
               ))}
-              
+
               {isLoading && (
                 <motion.div
                   className="message caroline"
@@ -250,7 +257,7 @@ const Chat: React.FC = () => {
                   </div>
                 </motion.div>
               )}
-              
+
               <div ref={messagesEndRef} />
             </div>
 

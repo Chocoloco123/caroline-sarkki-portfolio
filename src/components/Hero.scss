@@ -194,10 +194,11 @@
 .hero-social {
   display: flex;
   gap: $spacing-md;
-  justify-content: center;
+  justify-content: flex-start;
 
   @media (max-width: $breakpoint-md) {
     gap: $spacing-lg;
+    justify-content: center;
   }
 }
 
