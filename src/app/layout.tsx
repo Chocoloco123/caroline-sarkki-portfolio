@@ -87,20 +87,27 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Favicons */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+
         {/* Critical resource preloading for instant SSR rendering */}
         <link rel="preload" as="image" href="/goldenGateBridge.jpg" />
         <link rel="preload" as="image" href="/caroline-headshot.jpg" />
-        
+
         {/* DNS prefetch for external resources */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-        
+
         {/* Resource hints for better performance */}
         <link rel="prefetch" href="/projects/professional/voter-guide.png" />
         <link rel="prefetch" href="/projects/professional/navigation-redesign.png" />
         <link rel="prefetch" href="/projects/professional/micro-websites.png" />
         <link rel="prefetch" href="/projects/professional/user-accounts.png" />
-        
+
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
@@ -151,14 +158,14 @@ export default function RootLayout({
             })
           }}
         />
-        
+
         {/* Additional SEO meta tags */}
         <meta name="theme-color" content="#0f172a" />
         <meta name="msapplication-TileColor" content="#0f172a" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="format-detection" content="telephone=no" />
-        
+
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -168,7 +175,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
-        
+
         <div className="app">
           {children}
         </div>
