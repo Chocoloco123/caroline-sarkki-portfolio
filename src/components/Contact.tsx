@@ -69,7 +69,7 @@ const Contact: React.FC = () => {
         },
         publicKey
       )
-      
+
       setNotification({ message: 'Message sent successfully! I\'ll get back to you soon.', type: 'success' })
       setFormData({ name: '', email: '', subject: '', message: '' })
 
