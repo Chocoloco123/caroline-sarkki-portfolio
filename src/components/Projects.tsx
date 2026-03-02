@@ -46,7 +46,7 @@ const Projects: React.FC = () => {
       id: 'user-accounts',
       title: 'User Account System',
       description: 'Revamped KQED\'s user accounts and login flow, implementing secure authentication, improved UX, and streamlined account management features.',
-      technologies: ['Authentication', 'Security', 'UX Design'],
+      technologies: ['Authentication', 'Security', 'UX Design', 'Java'],
       link: 'https://www.kqed.org/account',
       icon: 'user-cog',
       screenshot: '/projects/professional/user-accounts.png'
