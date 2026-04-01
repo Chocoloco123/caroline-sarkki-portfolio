@@ -50,6 +50,17 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ study }) => {
               >
                 {study.liveCtaLabel}
               </a>
+              {study.githubRepos?.map((repo) => (
+                <a
+                  key={repo.url}
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="case-study__btn case-study__btn--ghost"
+                >
+                  {repo.label} (GitHub)
+                </a>
+              ))}
             </div>
           </div>
           <div className="case-study__hero-visual">
@@ -107,15 +118,28 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ study }) => {
           ))}
 
           <footer className="case-study__footer-cta">
-            <a
-              href={study.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="case-study__btn case-study__btn--primary"
-            >
-              {study.liveCtaLabel}
-            </a>
-            <p className="case-study__footer-note">Opens in a new tab</p>
+            <div className="case-study__footer-actions">
+              <a
+                href={study.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="case-study__btn case-study__btn--primary"
+              >
+                {study.liveCtaLabel}
+              </a>
+              {study.githubRepos?.map((repo) => (
+                <a
+                  key={repo.url}
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="case-study__btn case-study__btn--ghost"
+                >
+                  {repo.label} (GitHub)
+                </a>
+              ))}
+            </div>
+            <p className="case-study__footer-note">External links open in a new tab</p>
           </footer>
         </motion.article>
       </div>

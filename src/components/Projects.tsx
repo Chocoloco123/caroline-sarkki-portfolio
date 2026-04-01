@@ -66,7 +66,8 @@ const Projects: React.FC = () => {
         { label: 'Backend', url: 'https://github.com/Chocoloco123/Crittr-App-BE' },
       ],
       icon: 'user-cog',
-      screenshot: '/projects/personal/crittr.png'
+      screenshot: '/projects/personal/crittr.png',
+      caseStudyPath: '/case-studies/crittr'
     },
     {
       id: 'bauwau-haus',

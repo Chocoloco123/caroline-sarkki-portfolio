@@ -150,6 +150,31 @@
       outline-offset: 3px;
     }
   }
+
+  &--ghost {
+    background: white;
+    color: $primary-slate;
+    border-color: $border-medium;
+
+    &:hover {
+      transform: translateY(-1px);
+      border-color: $primary-slate-light;
+      background: $bg-secondary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $accent-blue;
+      outline-offset: 3px;
+    }
+  }
+}
+
+.case-study__footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
 }
 
 .case-study__hero-visual {

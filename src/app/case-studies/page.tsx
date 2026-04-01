@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { getAllCaseStudies } from '@/content/case-studies'
+import { getCaseStudiesForHub } from '@/content/case-studies'
 import '@/components/case-studies/CaseStudy.scss'
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default function CaseStudiesIndexPage() {
-  const studies = getAllCaseStudies()
+  const studies = getCaseStudiesForHub()
 
   return (
     <>
