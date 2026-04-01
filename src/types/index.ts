@@ -8,6 +8,8 @@ export interface Project {
   screenshot?: string
   /** Public repository URL; omit when the repo is private */
   githubLink?: string
+  /** Multiple repos (e.g. frontend + backend); takes precedence over githubLink when set */
+  githubRepos?: Array<{ label: string; url: string }>
   /** Internal route for a written case study (e.g. /case-studies/bauwau-haus) */
   caseStudyPath?: string
   /** Short label shown under the project image (e.g. Client Work) */

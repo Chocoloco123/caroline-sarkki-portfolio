@@ -25,7 +25,7 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ study }) => {
             Back to projects
           </Link>
           <Link href="/case-studies" className="case-study__all-link">
-            All case studies
+            Case studies
           </Link>
         </motion.div>
 

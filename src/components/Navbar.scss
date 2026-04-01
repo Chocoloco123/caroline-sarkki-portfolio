@@ -1,42 +1,57 @@
 @use '../styles/variables.scss' as *;
 
+.nav-backdrop {
+  display: none;
+
+  @media (max-width: $breakpoint-md) {
+    display: block;
+    position: fixed;
+    inset: 70px 0 0 0;
+    z-index: $z-fixed - 1;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    cursor: default;
+    background: rgba(15, 23, 42, 0.25);
+    animation: navBackdropIn 0.2s ease;
+  }
+}
+
+@keyframes navBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .navbar {
   position: fixed;
   top: 0;
-  width: 100%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
-  backdrop-filter: blur(20px);
+  left: 0;
+  right: 0;
   z-index: $z-fixed;
-  transition: all $transition-normal;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  height: 70px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  transition: background $transition-normal, border-color $transition-normal,
+    box-shadow $transition-normal;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, 
-      rgba(59, 130, 246, 0.05) 0%, 
-      rgba(147, 51, 234, 0.05) 50%, 
-      rgba(236, 72, 153, 0.05) 100%);
-    opacity: 0;
-    transition: opacity $transition-normal;
+  &--scrolled {
+    background: rgba(255, 255, 255, 0.94);
+    border-bottom-color: rgba(15, 23, 42, 0.08);
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04), 0 12px 40px rgba(15, 23, 42, 0.06);
   }
 
-  &:hover::before {
-    opacity: 1;
-  }
-
-  &.scrolled {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
-
-    &::before {
-      opacity: 1;
+  &--menu-open {
+    @media (max-width: $breakpoint-md) {
+      .nav-menu {
+        box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
+      }
     }
   }
 }
@@ -45,205 +60,154 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 $spacing-lg;
+  height: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  height: 70px;
+  justify-content: space-between;
+  gap: $spacing-md;
 }
 
-.nav-logo {
-  position: relative;
-  
-  a {
-    font-size: $font-size-2xl;
-    font-weight: $font-weight-bold;
-    background: linear-gradient(135deg, $primary-slate, $primary-slate-dark, $accent-blue);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-decoration: none;
-    transition: all $transition-normal;
-    position: relative;
-    animation: gradientShift 3s ease-in-out infinite;
+.nav-brand__link {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.02em;
+  color: $text-primary;
+  text-decoration: none;
+  transition: color $transition-fast;
 
-    &:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3));
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, $primary-slate, $primary-slate-dark, $accent-blue);
-      background-size: 200% 200%;
-      opacity: 0;
-      transition: opacity $transition-normal;
-      animation: gradientShift 3s ease-in-out infinite;
-      z-index: -1;
-      border-radius: 8px;
-      padding: 4px;
-      margin: -4px;
-    }
-
-    &:hover::before {
-      opacity: 0.1;
-    }
+  &:hover {
+    color: $primary-slate;
   }
-}
 
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+  &:focus-visible {
+    outline: 2px solid $accent-blue;
+    outline-offset: 4px;
+    border-radius: $radius-sm;
   }
 }
 
 .nav-menu {
   display: flex;
-  gap: $spacing-xl;
+  align-items: center;
+  gap: 0.125rem;
+
+  @media (min-width: 769px) {
+    gap: 0.25rem;
+  }
 
   @media (max-width: $breakpoint-md) {
     position: fixed;
-    left: -100%;
+    left: 0;
+    right: 0;
     top: 70px;
     flex-direction: column;
-    background-color: white;
-    width: 100%;
-    text-align: center;
-    transition: 0.3s;
-    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-    padding: $spacing-xl 0;
+    align-items: stretch;
+    gap: 0;
+    padding: $spacing-md $spacing-lg $spacing-xl;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid $border-light;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.2s ease, visibility 0.2s;
 
-    &.active {
-      left: 0;
+    &--open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
     }
   }
 }
 
 .nav-link {
-  color: $text-primary;
-  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  font-size: $font-size-sm;
   font-weight: $font-weight-medium;
-  transition: all $transition-normal;
-  position: relative;
-  padding: 8px 16px;
-  border-radius: 8px;
-  overflow: hidden;
+  color: $text-secondary;
+  text-decoration: none;
+  border-radius: $radius-md;
+  transition: color $transition-fast, background $transition-fast;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-      transparent, 
-      rgba(59, 130, 246, 0.1), 
-      transparent);
-    transition: left 0.5s ease;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, $primary-slate, $accent-blue, $accent-blue-dark);
-    transition: all $transition-normal;
-    transform: translateX(-50%);
-    border-radius: 1px;
+  @media (max-width: $breakpoint-md) {
+    justify-content: flex-start;
+    padding: $spacing-md $spacing-sm;
+    font-size: $font-size-base;
+    border-radius: $radius-lg;
   }
 
   &:hover {
-    color: $primary-slate;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
-
-    &::before {
-      left: 100%;
-    }
-
-    &::after {
-      width: 100%;
-    }
+    color: $text-primary;
+    background: rgba(15, 23, 42, 0.04);
   }
 
-  &:active {
-    transform: translateY(0);
+  &:focus-visible {
+    outline: 2px solid $accent-blue;
+    outline-offset: 2px;
+  }
+
+  &--active {
+    color: $text-primary;
+    font-weight: $font-weight-semibold;
+    background: rgba(59, 130, 246, 0.08);
   }
 }
 
 .nav-toggle {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: none;
+  border-radius: $radius-md;
+  background: transparent;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
-  transition: all $transition-normal;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-    opacity: 0;
-    transition: opacity $transition-normal;
-    border-radius: 8px;
-  }
-
-  &:hover::before {
-    opacity: 1;
-  }
+  color: $text-primary;
+  transition: background $transition-fast;
 
   @media (max-width: $breakpoint-md) {
     display: flex;
   }
 
-  .bar {
-    width: 25px;
-    height: 3px;
-    background: linear-gradient(90deg, $primary-slate, $accent-blue);
-    margin: 3px 0;
-    transition: all $transition-normal;
-    border-radius: 2px;
-    position: relative;
-    z-index: 1;
+  &:hover {
+    background: rgba(15, 23, 42, 0.06);
   }
 
-  &:hover .bar {
-    background: linear-gradient(90deg, $primary-slate-dark, $accent-blue);
-    transform: scale(1.1);
+  &:focus-visible {
+    outline: 2px solid $accent-blue;
+    outline-offset: 2px;
   }
 
-  &.active {
-    .bar:nth-child(2) {
+  &__bar {
+    display: block;
+    height: 2px;
+    width: 100%;
+    border-radius: 1px;
+    background: currentColor;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  &--open {
+    .nav-toggle__bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle__bar:nth-child(2) {
       opacity: 0;
-      transform: scale(0);
+      transform: scaleX(0);
     }
 
-    .bar:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
-      background: linear-gradient(90deg, #ef4444, #dc2626);
-    }
-
-    .bar:nth-child(3) {
-      transform: translateY(-8px) rotate(-45deg);
-      background: linear-gradient(90deg, #ef4444, #dc2626);
+    .nav-toggle__bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
     }
   }
 }

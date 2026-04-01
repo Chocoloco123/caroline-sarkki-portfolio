@@ -61,6 +61,10 @@ const Projects: React.FC = () => {
       description: 'An AI-powered pet care platform built with Next.js & FastAPI. Features intelligent chatbot, health tracking, digital journaling, and Google OAuth. Deployed on Railway + Vercel with PostgreSQL database. Helping pet parents create lasting memories while monitoring their furry friends\' wellbeing.',
       technologies: ['Next.js', 'FastAPI', 'PostgreSQL', 'TypeScript', 'Redux', 'Google OAuth', 'OpenAI API'],
       link: 'https://crittr-app.vercel.app/',
+      githubRepos: [
+        { label: 'Frontend', url: 'https://github.com/Chocoloco123/Crittr-App' },
+        { label: 'Backend', url: 'https://github.com/Chocoloco123/Crittr-App-BE' },
+      ],
       icon: 'user-cog',
       screenshot: '/projects/personal/crittr.png'
     },
@@ -116,8 +120,15 @@ const Projects: React.FC = () => {
     const hasImageError = imageErrors.has(project.id)
     const shouldShowImage = project.screenshot && !hasImageError
     const liveUrl = hasExternalLiveUrl(project.link) ? project.link : null
+    const githubEntries =
+      project.githubRepos && project.githubRepos.length > 0
+        ? project.githubRepos
+        : project.githubLink
+          ? [{ label: 'GitHub', url: project.githubLink }]
+          : []
     const showPersonalLinks =
-      personalLinkRow && (liveUrl || project.githubLink || project.caseStudyPath)
+      personalLinkRow &&
+      (liveUrl || githubEntries.length > 0 || project.caseStudyPath)
 
     return (
       <motion.div
@@ -207,19 +218,20 @@ const Projects: React.FC = () => {
                     <i className="fas fa-external-link-alt text-xs" aria-hidden="true" />
                   </a>
                 )}
-                {project.githubLink && (
+                {githubEntries.map(({ label, url }) => (
                   <a
-                    href={project.githubLink}
+                    key={url}
+                    href={url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
-                    aria-label={`${project.title} source on GitHub (opens in new tab)`}
+                    aria-label={`${project.title} ${label} on GitHub (opens in new tab)`}
                   >
                     <Icon name="github" size={14} className="inline-block align-middle mr-0.5" />
-                    GitHub{' '}
+                    {label}{' '}
                     <i className="fas fa-external-link-alt text-xs" aria-hidden="true" />
                   </a>
-                )}
+                ))}
                 {project.caseStudyPath && (
                   <Link
                     href={project.caseStudyPath}
