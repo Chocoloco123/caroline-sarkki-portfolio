@@ -13,6 +13,8 @@ export interface CaseStudyBlock {
   /** Shown above a list, e.g. "Key challenges included:" */
   listTitle?: string
   listItems?: string[]
+  /** Paragraphs rendered after the list (e.g. closing thought in Outcome). */
+  paragraphsAfterList?: string[]
 }
 
 export interface CaseStudy {
@@ -153,9 +155,9 @@ const crittr: CaseStudy = {
   title: 'Crittr',
   tag: 'Personal project',
   metaDescription:
-    'Full-stack pet health app with Next.js, FastAPI, PostgreSQL, Google OAuth, OpenAI, and deployments on Vercel and Railway.',
+    'Full-stack pet health app: Next.js, FastAPI, PostgreSQL, OAuth, magic-link auth, OpenAI, Docker, Vercel, and Railway.',
   heroSummary:
-    'An AI-assisted pet care platform for journaling, quick logs, health trends, and a conversational assistant, built as a split frontend and API with production deployments.',
+    'Track day-to-day pet care, surface patterns over time, and use AI-powered insights, with a split Next.js and FastAPI stack deployed to Vercel and Railway.',
   screenshot: '/projects/personal/crittr.png',
   screenshotAlt: 'Crittr app interface showing pet care dashboard and features',
   liveUrl: 'https://crittr-app.vercel.app/',
@@ -169,21 +171,24 @@ const crittr: CaseStudy = {
       id: 'overview',
       heading: 'Overview',
       paragraphs: [
-        'Crittr is a full-stack application for pet parents to track health, keep a digital journal, log activities in one tap, and get AI-generated insights. The product pairs a Next.js frontend with a Python FastAPI backend, PostgreSQL, Prisma, Google OAuth, and the OpenAI API, deployed to Vercel (frontend) and Railway (API) with a managed database.',
+        'Crittr is a full-stack pet health application designed to help users track day-to-day care, surface patterns over time, and better understand their pets\' health.',
+        'The product combines a Next.js and TypeScript frontend with a FastAPI backend backed by PostgreSQL. It supports multiple authentication flows, including Google OAuth and passwordless email login, and integrates AI-powered insights through server-side OpenAI APIs.',
+        'The system is intentionally split into separate frontend and backend repositories, with a containerized API (Docker) deployed to Railway and a frontend deployed to Vercel.',
       ],
     },
     {
       id: 'problem',
       heading: 'Problem',
       paragraphs: [
-        'Pet health information often lives in notes, spreadsheets, or separate apps, which makes trends hard to see and adds friction when talking to a vet or a sitter. There was a need for a single, structured place to record day-to-day care, surface patterns over time, and optionally lean on AI for summaries without sacrificing clarity or trust.',
+        'Pet health information is often scattered across notes, spreadsheets, or multiple apps, making it difficult to track trends or share meaningful insights with vets or caregivers.',
+        'Crittr was built to provide a single, structured system for tracking daily care, surfacing patterns, and optionally leveraging AI for summaries without sacrificing clarity or trust.',
       ],
       listTitle: 'Key challenges included:',
       listItems: [
-        'Modeling pets, users, journals, and quick logs in a way that stays fast and consistent across devices',
-        'Secure sign-in and session handling across a decoupled frontend and API',
-        'Integrating OpenAI features responsibly, with clear boundaries and error handling',
-        'Shipping a maintainable split codebase (frontend repo + backend repo) with sensible deployment paths',
+        'Modeling users, pets, journal entries, quick logs, reminders, and related entities in a relational database while keeping reads and writes predictable',
+        'Supporting multiple authentication flows (OAuth on the frontend, JWT and magic-link email auth on the backend) without duplicating or fragmenting user state',
+        'Integrating AI in a safe and controlled way (handling latency, errors, and keeping API keys server-side)',
+        'Running the backend consistently across local development and production using Docker, environment variables, and deployment scripts',
       ],
     },
     {
@@ -192,79 +197,90 @@ const crittr: CaseStudy = {
       paragraphs: ['The project focused on a few concrete outcomes:'],
       listItems: [
         'Support multiple pets per account with clear profiles and navigation',
-        'Make daily logging lightweight so the habit actually sticks',
-        'Provide optional AI assistance (insights and chat) that feels helpful, not gimmicky',
-        'Run in production with real auth, database, and hosting—not just a local demo',
+        'Make daily logging lightweight so the habit is easy to maintain',
+        'Build a backend that reflects the domain (pets, journals, logs, reminders), not just a thin prototype',
+        'Run in a production environment with real authentication, a relational database, and deployed frontend and backend services',
       ],
     },
     {
       id: 'approach',
       heading: 'Approach',
       paragraphs: [
-        'I treated the frontend and backend as separate deployable services with a clear API contract, so each side can evolve and scale independently. On the client, Redux Toolkit keeps complex UI state predictable; on the server, FastAPI and SQLAlchemy keep endpoints small and testable.',
+        'The system was designed with a clear separation between frontend and backend, connected through an explicit API contract.',
+        'On the frontend, Redux Toolkit was used to manage complex UI state across features like journaling, logging, and chat. On the backend, FastAPI handlers were kept lightweight, with SQLAlchemy models handling persistence and Pydantic schemas handling validation and data transfer.',
+        'The backend follows a Docker-first workflow to keep local, staging, and production environments as consistent as possible.',
       ],
       listTitle: 'Key decisions included:',
       listItems: [
-        'Next.js App Router and TypeScript on the frontend for structure and performance',
-        'FastAPI and PostgreSQL on the backend for speed of iteration and solid relational modeling',
-        'Google OAuth for a familiar sign-in path and fewer passwords to manage',
-        'Docker-oriented backend workflow so local and hosted environments stay aligned',
+        'Using Next.js (App Router) and TypeScript for structure, scalability, and performance on the frontend',
+        'Using FastAPI, PostgreSQL, and SQLAlchemy to model relational data clearly and support future growth',
+        'Splitting authentication responsibilities: Google OAuth on the frontend and JWT + magic-link flows handled securely on the backend',
+        'Keeping all AI interactions server-side to protect secrets and allow for better error handling and control',
+        'Structuring the backend to be deployable via Docker with environment-driven configuration',
       ],
     },
     {
       id: 'implementation',
       heading: 'Implementation',
       paragraphs: [
-        'The frontend handles routing, forms, charts, and chat UX; the backend exposes REST-style endpoints for pets, journal entries, quick logs, reminders, and AI-backed flows. Email and secrets stay server-side; the client talks to the API over HTTPS with tokens as appropriate.',
+        'The frontend handles routing, forms, charts, and chat interactions, while the backend exposes REST-style APIs for users, pets, journal entries, quick logs, reminders, and health checks.',
+        'OpenAI-powered features are implemented on the server, ensuring that API keys and model interactions are never exposed to the client.',
       ],
       listTitle: 'Highlights:',
       listItems: [
-        'Responsive UI with attention to mobile use cases',
-        'Prisma (frontend tooling) and SQLAlchemy migrations on the backend for schema evolution',
-        'Integration with OpenAI for summaries and chat features behind the API',
-        'Deployments: Vercel for the web app, Railway for the API, with environment-specific configuration',
+        'Responsive UI designed for both desktop and mobile usage',
+        'Clear separation between frontend (Prisma usage) and backend (SQLAlchemy + migrations) for data handling',
+        'Auth system combining OAuth, JWT sessions, and passwordless email login',
+        'Containerized backend with Docker for consistent development and deployment',
+        'Deployments: Vercel for the frontend and Railway for the backend',
       ],
     },
     {
       id: 'challenges',
       heading: 'Challenges and tradeoffs',
       paragraphs: [
-        'A split stack adds coordination cost: CORS, cookies or tokens, and keeping environments in sync all need discipline. AI features add latency, cost, and the need for guardrails and fallbacks when the model or network fails.',
+        'Splitting the system into a frontend and backend introduced coordination challenges, particularly around authentication, CORS, and environment configuration across Vercel, Railway, and local Docker setups.',
       ],
       listItems: [
-        'Balancing feature breadth with time to ship a stable core experience',
-        'Configuring auth and environment variables across Vercel, Railway, and local dev',
-        'Keeping the API surface clear as entities like pets, journals, and logs grew',
+        'Balancing feature breadth with the need to ship a stable, maintainable core system',
+        'Managing multiple authentication flows without introducing inconsistent user state',
+        'Handling AI-related tradeoffs, including latency, cost, and failure scenarios',
+        'Ensuring reliable email delivery for magic-link authentication via SMTP',
+        'Keeping the growing data model (pets, journals, logs, reminders) cohesive as the API surface expanded',
       ],
     },
     {
       id: 'outcome',
       heading: 'Outcome',
       paragraphs: [
-        'Crittr ships as a live application with authenticated users, persistent data, and deployed services end to end. It demonstrates full-stack ownership from product shape through production operations.',
+        'Crittr is a live, production-ready application with authenticated users, persistent relational data, and deployed frontend and backend services.',
       ],
       listItems: [
-        'A cohesive product surface for journaling, logging, and AI-assisted help',
-        'Two public repositories that mirror the real architecture (frontend and backend)',
-        'A foundation that could extend toward analytics, CMS-style content, or native clients next',
+        'A cohesive product experience for journaling, quick logging, reminders, and AI-assisted insights',
+        'A clear separation of frontend and backend systems, each deployable and maintainable independently',
+        'Two public repositories reflecting real-world full-stack architecture and deployment practices',
+      ],
+      paragraphsAfterList: [
+        'The project provides a strong foundation for further iteration, including deeper testing, analytics, and additional client platforms.',
       ],
     },
     {
       id: 'role',
       heading: 'My role',
       paragraphs: [
-        'I designed and implemented the system across both repositories: API design, database modeling, frontend architecture, auth integration, AI wiring, deployment, and iterative hardening.',
+        'I owned the project end-to-end across both repositories, including system design, API and database modeling, frontend architecture, authentication flows, AI integration, and deployment setup.',
+        'This included designing the schema, implementing backend services, configuring Docker environments, integrating OAuth and email-based authentication, and building the frontend user experience.',
       ],
     },
     {
       id: 'next',
       heading: 'What I would improve next',
-      paragraphs: ['If I continued investing in Crittr, I would prioritize:'],
+      paragraphs: ['If continuing to invest in Crittr, I would prioritize:'],
       listItems: [
-        'Broader automated testing (API contracts, critical user flows, and AI edge cases)',
-        'Observability: structured logging, metrics, and clearer error surfaces for users',
-        'Deeper accessibility review and performance passes on data-heavy views',
-        'Optional native or offline-first experiences for logging on the go',
+        'Expanding automated testing (pytest for backend services and end-to-end tests for critical flows like authentication and journaling)',
+        'Improving observability with user-facing metrics and alerting around API errors and AI failures',
+        'Further accessibility and performance optimizations, especially for data-heavy views',
+        'Exploring offline-first or mobile-native experiences to support logging on the go',
       ],
     },
   ],

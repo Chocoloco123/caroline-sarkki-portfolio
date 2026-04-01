@@ -113,6 +113,11 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ study }) => {
                     ))}
                   </ul>
                 ) : null}
+                {block.paragraphsAfterList?.map((p, i) => (
+                  <p key={`after-${i}`} className="case-study__prose">
+                    {p}
+                  </p>
+                ))}
               </div>
             </section>
           ))}

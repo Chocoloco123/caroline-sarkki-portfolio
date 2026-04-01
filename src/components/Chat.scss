@@ -230,14 +230,14 @@
 
   .message {
     display: flex;
-    max-width: 85%;
     min-width: 0;
     flex-shrink: 0;
-    width: fit-content;
+    max-width: 85%;
 
     &.user {
       align-self: flex-end;
       justify-content: flex-end;
+      width: fit-content;
 
       .message-content {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -249,12 +249,15 @@
     &.caroline {
       align-self: flex-start;
       justify-content: flex-start;
+      width: 100%;
+      max-width: 85%;
 
       .message-content {
         background: white;
         color: #334155;
         border-radius: 18px 18px 18px 4px;
         border: 1px solid #e2e8f0;
+        overflow: hidden;
       }
     }
 
@@ -283,7 +286,7 @@
         font-size: 14px;
         line-height: 1.6;
         word-wrap: break-word;
-        overflow-wrap: break-word;
+        overflow-wrap: anywhere;
         word-break: break-word;
         hyphens: auto;
         width: 100%;
@@ -291,6 +294,45 @@
         box-sizing: border-box;
         display: block;
         min-width: 0;
+
+        // Links: explicit affordance in light mode (dark-theme overrides live below)
+        a {
+          word-break: break-word;
+          overflow-wrap: anywhere;
+          max-width: 100%;
+          display: inline;
+          cursor: pointer;
+          text-decoration: underline;
+          text-underline-offset: 0.2em;
+          font-weight: 500;
+          transition:
+            color 0.15s ease,
+            background-color 0.15s ease;
+
+          &:focus-visible {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+            border-radius: 4px;
+          }
+
+          // Same pill + purple treatment for mailto and http(s) — one “clickable link” look
+          &[href^='mailto:'],
+          &[href^='http'] {
+            color: #5b21b6;
+            background-color: rgba(124, 58, 237, 0.12);
+            padding: 0.12em 0.45em;
+            border-radius: 8px;
+            text-decoration: underline;
+            text-underline-offset: 0.18em;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+
+            &:hover {
+              background-color: rgba(124, 58, 237, 0.2);
+              color: #4c1d95;
+            }
+          }
+        }
 
         // Style formatted content from backend
         p {
@@ -309,6 +351,41 @@
         h3 {
           font-size: 16px;
           color: #1e293b;
+        }
+
+        // Contact block (Clio prompt: "Contact Caroline" + labeled rows)
+        .contact-clio {
+          margin-top: 2px;
+
+          h3 {
+            margin: 0 0 14px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e293b;
+          }
+
+          p {
+            margin: 0 0 14px;
+            line-height: 1.5;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            strong {
+              display: block;
+              font-weight: 600;
+              color: #475569;
+              margin-bottom: 2px;
+              font-size: 13px;
+              line-height: 1.25;
+            }
+
+            // Block <strong> already breaks the line; <br /> after it adds extra gap — drop it visually
+            strong + br {
+              display: none;
+            }
+          }
         }
 
         ul, ol {
@@ -401,14 +478,17 @@
             font-size: 12px;
             font-weight: 500;
             border: 1px solid #e2e8f0;
-            white-space: nowrap;
-            display: inline-block;
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+            display: inline;
+            max-width: 100%;
             font-family: inherit;
-            vertical-align: middle;
+            vertical-align: baseline;
           }
         }
 
-        // Style any code elements that look like skills
+        // Style any code elements that look like skills (URLs and long text must wrap)
         code {
           background: #f1f5f9;
           color: #475569;
@@ -417,10 +497,14 @@
           font-size: 12px;
           font-weight: 500;
           border: 1px solid #e2e8f0;
-          white-space: nowrap;
-          display: inline-block;
+          white-space: normal;
+          word-break: break-word;
+          overflow-wrap: anywhere;
+          display: inline;
+          max-width: 100%;
           font-family: inherit;
-          vertical-align: middle;
+          vertical-align: baseline;
+          box-sizing: border-box;
         }
 
         // Handle skills that appear as plain text in lists
@@ -535,8 +619,8 @@
           min-width: 0 !important;
         }
 
-        // Handle any inline code or tags that might be cut off
-        code, .tag, .badge {
+        // Short labels only (not raw URL code pills)
+        .tag, .badge {
           white-space: nowrap;
           display: inline-block;
           max-width: 100%;
@@ -854,52 +938,35 @@
     }
   }
 
-  // Style links and contact information in chat messages
   .message-text {
-    // Style all links
-    a {
-      color: #3b82f6;
-      text-decoration: underline;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      max-width: 100%;
-
-      // Remove hover effects for better UX
-      &:hover {
-        color: #3b82f6;
-        text-decoration: underline;
+    .contact-clio {
+      h3 {
+        color: #f1f5f9;
       }
 
-      // Style email links specifically
-      &[href^="mailto:"] {
-        color: #059669;
-        font-weight: 500;
-
-        &:hover {
-          color: #059669;
-        }
-      }
-
-      // Style external links
-      &[href^="http"] {
-        color: #7c3aed;
-
-        &:hover {
-          color: #7c3aed;
-        }
+      p strong {
+        color: #cbd5e1;
       }
     }
 
-    // Style email addresses even if not wrapped in <a> tags
-    // This will catch email addresses that appear as plain text
-    *:contains("@") {
-      color: #059669;
-      font-weight: 500;
-      cursor: pointer;
+    a {
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      max-width: 100%;
 
-      &:hover {
-        color: #059669;
-        text-decoration: none;
+      &[href^='mailto:'],
+      &[href^='http'] {
+        color: #c4b5fd;
+        background-color: rgba(139, 92, 246, 0.25);
+        padding: 0.12em 0.45em;
+        border-radius: 8px;
+        text-decoration: underline;
+        text-underline-offset: 0.18em;
+        &:hover {
+          color: #ddd6fe;
+          background-color: rgba(139, 92, 246, 0.35);
+        }
       }
     }
   }
