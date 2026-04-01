@@ -6,6 +6,12 @@ export interface Project {
   link: string
   icon: string
   screenshot?: string
+  /** Public repository URL; omit when the repo is private */
+  githubLink?: string
+  /** Internal route for a written case study (e.g. /case-studies/bauwau-haus) */
+  caseStudyPath?: string
+  /** Short label shown under the project image (e.g. Client Work) */
+  tag?: string
 }
 
 export interface Skill {

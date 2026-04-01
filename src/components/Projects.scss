@@ -165,3 +165,34 @@
     color: $primary-slate-dark;
   }
 }
+
+.project-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  margin-top: auto;
+  padding-top: $spacing-sm;
+
+  a {
+    color: $primary-slate;
+    text-decoration: none;
+    font-weight: $font-weight-semibold;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    transition: color $transition-normal;
+    font-size: $font-size-sm;
+
+    &:hover {
+      color: $primary-slate-dark;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $primary-slate;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  }
+}

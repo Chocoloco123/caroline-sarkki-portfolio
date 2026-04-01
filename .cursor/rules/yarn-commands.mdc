@@ -1,0 +1,20 @@
+---
+description: Run and build this Next.js portfolio with Yarn
+alwaysApply: true
+---
+
+# Commands
+
+Use **Yarn** for this project (not npm).
+
+- **Local development**: `yarn dev`
+- **Production build**: `yarn build` (only when needed; see below)
+- **Serve production build**: `yarn start` (after `yarn build`)
+
+## During development
+
+- **Do not run `yarn build` by default** while iterating on features or UI. The user often already has **`yarn dev`** running; that is enough to validate changes.
+- **Do not start a second dev server** if one is likely already running unless the user asks or something is broken.
+- Run **`yarn build`** only when the user explicitly asks for a production compile check, when debugging production-only issues, or before deploy/CI-style verification.
+
+Prefer **`yarn dev`** for day-to-day work.

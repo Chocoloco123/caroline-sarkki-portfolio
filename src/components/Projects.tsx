@@ -1,11 +1,12 @@
 'use client'
 
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Project } from '../types'
+import Icon from '@/components/ui/icon'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import Icon from '@/components/ui/icon'
 import './Projects.scss'
 
 const Projects: React.FC = () => {
@@ -64,6 +65,18 @@ const Projects: React.FC = () => {
       screenshot: '/projects/personal/crittr.png'
     },
     {
+      id: 'bauwau-haus',
+      title: 'The BauWau Haus',
+      tag: 'Client Work',
+      description:
+        'Designed and developed a modern small business website for a dog training brand, focused on clear service communication, trust-building design, and a seamless contact experience. Delivered end-to-end from implementation to deployment.',
+      technologies: ['Next.js', 'React', 'TypeScript', 'Vercel', 'Resend', 'GoDaddy (DNS)'],
+      link: 'https://www.thebauwauhaus.com/',
+      icon: 'globe',
+      screenshot: '/projects/personal/thebauwauhaus.png',
+      caseStudyPath: '/case-studies/bauwau-haus'
+    },
+    {
       id: 'ai-note-app',
       title: 'AI-Powered Note Taking App',
       description: 'Built a sophisticated note-taking application that leverages OpenAI API for intelligent summarization. Features include smart categorization, automatic summaries, and search functionality.',
@@ -97,9 +110,14 @@ const Projects: React.FC = () => {
     }
   ]
 
-  const renderProjectCard = (project: Project, index: number) => {
+  const hasExternalLiveUrl = (url: string) => /^https?:\/\//i.test(url)
+
+  const renderProjectCard = (project: Project, index: number, personalLinkRow = false) => {
     const hasImageError = imageErrors.has(project.id)
     const shouldShowImage = project.screenshot && !hasImageError
+    const liveUrl = hasExternalLiveUrl(project.link) ? project.link : null
+    const showPersonalLinks =
+      personalLinkRow && (liveUrl || project.githubLink || project.caseStudyPath)
 
     return (
       <motion.div
@@ -137,6 +155,13 @@ const Projects: React.FC = () => {
               <Icon name={project.icon} size={32} aria-label={`${project.title} project icon`} />
             )}
           </div>
+            {project.tag && (
+              <p className="mb-2 text-center">
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  {project.tag}
+                </span>
+              </p>
+            )}
             <CardTitle
               id={`project-title-${project.id}`}
               className="text-xl font-bold text-slate-800"
@@ -163,16 +188,61 @@ const Projects: React.FC = () => {
               </Badge>
             ))}
           </div>
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-link inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
-            aria-label={`View ${project.title} project (opens in new tab)`}
-            aria-describedby={`project-desc-${project.id}`}
-          >
-            View Project <i className="fas fa-external-link-alt" aria-hidden="true"></i>
-          </a>
+          {personalLinkRow ? (
+            showPersonalLinks ? (
+              <div
+                className="project-card-links text-slate-700"
+                role="group"
+                aria-label={`${project.title} project links`}
+              >
+                {liveUrl && (
+                  <a
+                    href={liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
+                    aria-label={`${project.title} live site (opens in new tab)`}
+                  >
+                    Live site{' '}
+                    <i className="fas fa-external-link-alt text-xs" aria-hidden="true" />
+                  </a>
+                )}
+                {project.githubLink && (
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
+                    aria-label={`${project.title} source on GitHub (opens in new tab)`}
+                  >
+                    <Icon name="github" size={14} className="inline-block align-middle mr-0.5" />
+                    GitHub{' '}
+                    <i className="fas fa-external-link-alt text-xs" aria-hidden="true" />
+                  </a>
+                )}
+                {project.caseStudyPath && (
+                  <Link
+                    href={project.caseStudyPath}
+                    className="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
+                    aria-label={`${project.title} case study`}
+                  >
+                    Case study
+                  </Link>
+                )}
+              </div>
+            ) : null
+          ) : (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
+              aria-label={`View ${project.title} project (opens in new tab)`}
+              aria-describedby={`project-desc-${project.id}`}
+            >
+              View Project <i className="fas fa-external-link-alt" aria-hidden="true"></i>
+            </a>
+          )}
         </CardContent>
       </Card>
     </motion.div>
@@ -235,7 +305,7 @@ const Projects: React.FC = () => {
             aria-labelledby="personal-projects-heading"
             aria-label="Personal projects grid"
           >
-            {personalProjects.map((project, index) => renderProjectCard(project, index))}
+            {personalProjects.map((project, index) => renderProjectCard(project, index, true))}
           </div>
         </motion.div>
       </div>

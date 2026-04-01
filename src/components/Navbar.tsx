@@ -1,10 +1,12 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import './Navbar.scss'
 
 const Navbar: React.FC = () => {
+  const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -27,6 +29,11 @@ const Navbar: React.FC = () => {
   ]
 
   const handleLinkClick = (href: string) => {
+    if (pathname !== '/') {
+      window.location.href = `/${href}`
+      setIsMenuOpen(false)
+      return
+    }
     const targetSection = document.querySelector(href) as HTMLElement
     if (targetSection) {
       const offsetTop = targetSection.offsetTop - 70
