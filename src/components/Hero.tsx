@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
   }, [])
 
   const socialLinks = [
-    { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki-2a5517126/', icon: 'linkedin' },
+    { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki', icon: 'linkedin' },
     { platform: 'GitHub', url: 'https://github.com/Chocoloco123', icon: 'github' },
     { platform: 'Email', url: 'mailto:csarkki.swe@gmail.com', icon: 'envelope' }
   ]
@@ -67,6 +67,20 @@ const Hero: React.FC = () => {
               aria-label="Get in touch with Caroline Sarkki"
             >
               Get In Touch
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+            >
+              <a
+                href="/resume/Caroline_Sarkki_Resume.pdf"
+                download="Caroline_Sarkki_Resume.pdf"
+                aria-label="Download Caroline Sarkki's resume (PDF)"
+              >
+                <Icon name="download" size={16} />
+                Download Resume
+              </a>
             </Button>
           </div>
 

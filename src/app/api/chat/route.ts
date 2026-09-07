@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 const CONTACT_URL_LABELS: ReadonlyArray<{ test: (href: string) => boolean; label: string }> = [
   {
     test: (h) =>
-      /^https:\/\/(www\.)?linkedin\.com\/in\/caroline-sarkki-2a5517126\/?$/i.test(
+      /^https:\/\/(www\.)?linkedin\.com\/in\/caroline-sarkki\/?$/i.test(
         stripHash(h)
       ),
     label: 'View Profile',

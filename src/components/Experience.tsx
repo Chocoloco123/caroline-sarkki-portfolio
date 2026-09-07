@@ -8,9 +8,10 @@ import './Experience.scss'
 const Experience: React.FC = () => {
   const experiences: ExperienceItem[] = [
     {
-      title: 'Software Engineer — Full-Stack Focus',
+      title: 'Frontend Developer',
       company: 'KQED',
       period: 'June 2025 - Present',
+      scope: 'Full-stack scope: React/TypeScript frontends, Node.js/Java/Spring Boot APIs, MongoDB, PostgreSQL, Docker/GCP.',
       responsibilities: [
         'Delivered end-to-end development for a Membership & Account platform rebuild using React, TypeScript, Node.js, Java, Spring Boot, and MongoDB',
         'Improved donor and member experience through clearer account interactions and streamlined authentication workflows',
@@ -22,7 +23,7 @@ const Experience: React.FC = () => {
       ]
     },
     {
-      title: 'Software Developer — Frontend Focus',
+      title: 'Frontend Developer',
       company: 'KQED',
       period: 'June 2023 - June 2025',
       responsibilities: [
@@ -77,6 +78,9 @@ const Experience: React.FC = () => {
                 <h3>{experience.title}</h3>
                 <h4>{experience.company}</h4>
                 <span className="timeline-date">{experience.period}</span>
+                {experience.scope && (
+                  <p className="timeline-scope">{experience.scope}</p>
+                )}
                 <ul className="experience-list">
                   {experience.responsibilities.map((responsibility, index) => (
                     <motion.li

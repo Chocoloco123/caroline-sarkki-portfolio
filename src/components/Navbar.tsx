@@ -10,12 +10,14 @@ const SECTION_OFFSET = 72
 
 type SectionNav = { type: 'section'; hash: string; label: string }
 type RouteNav = { type: 'route'; path: string; label: string; matchPrefix?: boolean }
+type ExternalNav = { type: 'external'; href: string; label: string }
 
-const navItems: Array<SectionNav | RouteNav> = [
+const navItems: Array<SectionNav | RouteNav | ExternalNav> = [
   { type: 'section', hash: '#about', label: 'About' },
   { type: 'section', hash: '#experience', label: 'Experience' },
   { type: 'section', hash: '#projects', label: 'Projects' },
   { type: 'route', path: '/case-studies', label: 'Case studies', matchPrefix: true },
+  { type: 'external', href: '/resume/Caroline_Sarkki_Resume.pdf', label: 'Resume' },
   { type: 'section', hash: '#contact', label: 'Contact' },
 ]
 
@@ -129,6 +131,23 @@ const Navbar: React.FC = () => {
                 >
                   {item.label}
                 </Link>
+              )
+            }
+
+            if (item.type === 'external') {
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-link"
+                  role="menuitem"
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-label={`${item.label} (opens in new tab)`}
+                >
+                  {item.label}
+                </a>
               )
             }
 

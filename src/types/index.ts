@@ -3,7 +3,8 @@ export interface Project {
   title: string
   description: string
   technologies: string[]
-  link: string
+  /** Live/external URL; omit for internal-only projects with no public link */
+  link?: string
   icon: string
   screenshot?: string
   /** Public repository URL; omit when the repo is private */
@@ -16,16 +17,12 @@ export interface Project {
   tag?: string
 }
 
-export interface Skill {
-  name: string
-  level: number
-  category: string
-}
-
 export interface ExperienceItem {
   title: string
   company: string
   period: string
+  /** Subtitle line summarizing the role's technical scope, shown under the title/dates */
+  scope?: string
   responsibilities: string[]
 }
 

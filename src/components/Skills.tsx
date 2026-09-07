@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Skill } from '../types'
 import './Skills.scss'
 
 const Skills: React.FC = () => {
@@ -10,46 +9,60 @@ const Skills: React.FC = () => {
     {
       title: 'Frontend Development',
       skills: [
-        { name: 'TypeScript', level: 90, category: 'Frontend Development' },
-        { name: 'JavaScript', level: 90, category: 'Frontend Development' },
-        { name: 'React', level: 85, category: 'Frontend Development' },
-        { name: 'HTML5/CSS3', level: 95, category: 'Frontend Development' },
-        { name: 'Sass/SCSS', level: 90, category: 'Frontend Development' },
-        { name: 'Responsive Design', level: 90, category: 'Frontend Development' }
+        'TypeScript',
+        'JavaScript',
+        'React',
+        'HTML5/CSS3',
+        'Sass/SCSS',
+        'Responsive Design',
+        'Accessibility (WCAG 2.1 AA)'
       ]
     },
     {
       title: 'Backend Development',
       skills: [
-        { name: 'Node.js', level: 80, category: 'Backend Development' },
-        { name: 'Java', level: 85, category: 'Backend Development' },
-        { name: 'Python', level: 80, category: 'Backend Development' },
-        { name: 'API Development', level: 85, category: 'Backend Development' },
-        { name: 'SQL', level: 90, category: 'Backend Development' },
-        { name: 'PostgreSQL', level: 85, category: 'Backend Development' },
-        { name: 'MySQL', level: 80, category: 'Backend Development' },
-        { name: 'Database Design', level: 75, category: 'Backend Development' },
-        { name: 'System Maintenance', level: 90, category: 'Backend Development' }
+        'Node.js',
+        'Java',
+        'Spring Boot',
+        'Python',
+        'API Development',
+        'SQL',
+        'PostgreSQL',
+        'MySQL',
+        'Database Design',
+        'System Maintenance'
+      ]
+    },
+    {
+      title: 'Cloud & DevOps',
+      skills: [
+        'Docker',
+        'Google Cloud Platform (GCP)',
+        'CI/CD'
       ]
     },
     {
       title: 'AI & Integration',
       skills: [
-        { name: 'OpenAI API', level: 90, category: 'AI & Integration' },
-        { name: 'AI Integration', level: 85, category: 'AI & Integration' },
-        { name: 'Web Scraping', level: 80, category: 'AI & Integration' },
-        { name: 'Chrome Extensions', level: 85, category: 'AI & Integration' },
-        { name: 'Data Analysis', level: 80, category: 'AI & Integration' }
+        'OpenAI API',
+        'Claude API',
+        'AI-Assisted Development',
+        'AI Integration',
+        'Web Scraping',
+        'Chrome Extensions',
+        'Data Analysis'
       ]
     },
     {
       title: 'Leadership & Practices',
       skills: [
-        { name: 'Intern Mentoring', level: 90, category: 'Leadership & Practices' },
-        { name: 'Code Review', level: 90, category: 'Leadership & Practices' },
-        { name: 'Unit Testing', level: 85, category: 'Leadership & Practices' },
-        { name: 'Technical Leadership', level: 85, category: 'Leadership & Practices' },
-        { name: 'SEO Optimization', level: 80, category: 'Leadership & Practices' }
+        'Intern Mentoring',
+        'Code Review',
+        'Unit Testing',
+        'Technical Leadership',
+        'Developer Experience',
+        'Technical Documentation',
+        'SEO Optimization'
       ]
     }
   ]
@@ -57,7 +70,7 @@ const Skills: React.FC = () => {
   return (
     <section id="skills" className="skills" aria-labelledby="skills-heading">
       <div className="container">
-        <motion.h2 
+        <motion.h2
           id="skills-heading"
           className="section-title"
           initial={{ opacity: 0, y: 30 }}
@@ -67,7 +80,7 @@ const Skills: React.FC = () => {
         >
           Technical Skills
         </motion.h2>
-        
+
         <div className="skills-grid" role="list" aria-label="Technical skills categories">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
@@ -80,47 +93,24 @@ const Skills: React.FC = () => {
               role="listitem"
             >
               <h3 id={`category-${categoryIndex}`}>{category.title}</h3>
-              <div 
+              <div
                 className="skill-items"
                 role="list"
                 aria-labelledby={`category-${categoryIndex}`}
                 aria-label={`${category.title} skills`}
               >
                 {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill.name}
-                    className="skill-item"
+                  <motion.span
+                    key={skill}
+                    className="skill-tag"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: skillIndex * 0.1 }}
                     viewport={{ once: true }}
                     role="listitem"
                   >
-                    <span className="skill-name">{skill.name}</span>
-                    <div 
-                      className="skill-bar"
-                      role="progressbar"
-                      aria-valuenow={skill.level}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-label={`${skill.name} skill level: ${skill.level}%`}
-                      aria-describedby={`skill-desc-${skill.name.replace(/\s+/g, '-').toLowerCase()}`}
-                    >
-                      <motion.div
-                        className="skill-progress"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: skillIndex * 0.1 }}
-                        viewport={{ once: true }}
-                      />
-                    </div>
-                    <span 
-                      id={`skill-desc-${skill.name.replace(/\s+/g, '-').toLowerCase()}`}
-                      className="sr-only"
-                    >
-                      {skill.level}% proficiency in {skill.name}
-                    </span>
-                  </motion.div>
+                    {skill}
+                  </motion.span>
                 ))}
               </div>
             </motion.div>

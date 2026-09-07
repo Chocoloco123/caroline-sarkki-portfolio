@@ -17,6 +17,14 @@ const Projects: React.FC = () => {
   }
   const professionalProjects: Project[] = [
     {
+      id: 'election-results-ai-pipeline',
+      title: 'KQED Election Results AI Pipeline',
+      tag: 'Featured',
+      description: "Designed and built KQED's first internal AI product: a self-serve tool where a data lead selects a county and either uploads a results file or triggers an automated scrape, with the Claude API standardizing the output into sheet-ready data. Validated against live election data during the June 2026 midterms; connecting to KQED's public election results site for full production in November 2026. Replaced a manual process that required about a dozen people entering county results by hand with a self-serve tool run by a much smaller team, repeatedly over the month-plus results period, while retaining human QA review. Built solo using Claude Code and Cursor.",
+      technologies: ['React', 'Node.js', 'Claude API', 'Google Sheets API'],
+      icon: 'vote-yea'
+    },
+    {
       id: 'voter-guide',
       title: 'KQED Voter Guide',
       description: 'Developed a comprehensive voter guide application that helps users make informed decisions during elections. Features include candidate information, ballot measures, and voting locations.',
@@ -46,11 +54,35 @@ const Projects: React.FC = () => {
     {
       id: 'user-accounts',
       title: 'User Account System',
-      description: 'Revamped KQED\'s user accounts and login flow, implementing secure authentication, improved UX, and streamlined account management features.',
-      technologies: ['Authentication', 'Security', 'UX Design', 'Java'],
+      description: 'Built backend APIs for authentication, profile management, secure account deletion, and integration with a third-party membership provider handling sensitive patron data.',
+      technologies: ['Authentication', 'Security', 'UX Design', 'Java', 'Node.js'],
       link: 'https://www.kqed.org/account',
       icon: 'user-cog',
       screenshot: '/projects/professional/user-accounts.png'
+    }
+  ]
+
+  const dxProjects: Project[] = [
+    {
+      id: 'ai-maker-workshop',
+      title: 'AI Maker Workshop Series',
+      description: 'Created and taught an internal workshop series introducing practical applications of AI/LLM tooling and prompt engineering, attended by 10 of the 15 people on the product team, engineers and non-engineers alike.',
+      technologies: ['Internal Training', 'AI/LLM Tooling', 'Prompt Engineering'],
+      icon: 'comments'
+    },
+    {
+      id: 'shared-ai-skills',
+      title: 'Shared AI Skills Repository',
+      description: 'Built and maintain an internal library of reusable AI skills — including tools for engineering documentation, Jira ticket formatting, and document summarization — open to the full team, including non-engineers.',
+      technologies: ['Claude API', 'Internal Tooling'],
+      icon: 'brain'
+    },
+    {
+      id: 'postman-standard',
+      title: 'Postman Standard',
+      description: "Established the team's Postman standard: wrote the documentation, maintain a canonical forkable collection pattern, and configured role-based access permissions for every engineer and contractor.",
+      technologies: ['API Design', 'Documentation', 'Access Control'],
+      icon: 'bars'
     }
   ]
 
@@ -115,7 +147,7 @@ const Projects: React.FC = () => {
     }
   ]
 
-  const hasExternalLiveUrl = (url: string) => /^https?:\/\//i.test(url)
+  const hasExternalLiveUrl = (url?: string) => !!url && /^https?:\/\//i.test(url)
 
   const renderProjectCard = (project: Project, index: number, personalLinkRow = false) => {
     const hasImageError = imageErrors.has(project.id)
@@ -245,16 +277,18 @@ const Projects: React.FC = () => {
               </div>
             ) : null
           ) : (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
-              aria-label={`View ${project.title} project (opens in new tab)`}
-              aria-describedby={`project-desc-${project.id}`}
-            >
-              View Project <i className="fas fa-external-link-alt" aria-hidden="true"></i>
-            </a>
+            liveUrl && (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-link inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
+                aria-label={`View ${project.title} project (opens in new tab)`}
+                aria-describedby={`project-desc-${project.id}`}
+              >
+                View Project <i className="fas fa-external-link-alt" aria-hidden="true"></i>
+              </a>
+            )
           )}
         </CardContent>
       </Card>
@@ -296,6 +330,29 @@ const Projects: React.FC = () => {
             aria-label="Professional projects grid"
           >
             {professionalProjects.map((project, index) => renderProjectCard(project, index))}
+          </div>
+        </motion.div>
+
+        {/* Developer Experience & Enablement */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          <h3
+            id="dx-projects-heading"
+            className="text-2xl mb-20 text-center"
+          >
+            Developer Experience & Enablement
+          </h3>
+          <div
+            className="projects-grid mb-16"
+            role="grid"
+            aria-labelledby="dx-projects-heading"
+            aria-label="Developer experience and enablement projects grid"
+          >
+            {dxProjects.map((project, index) => renderProjectCard(project, index))}
           </div>
         </motion.div>
 

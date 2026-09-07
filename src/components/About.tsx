@@ -51,23 +51,15 @@ const About: React.FC = () => {
             viewport={{ once: true }}
           >
             <p>
-              I'm a full-stack engineer at KQED who loves building things that are useful, accessible, and built to last. Over the past {yearsOfExperience} years, I've worked across the stack—from intuitive UIs to backend services, APIs, and cloud deployments.
+              Full-Stack Software Engineer at KQED, where I build end-to-end features for platforms serving hundreds of thousands of people — and increasingly, the tooling and training that make my team faster.
             </p>
 
             <p>
-              Some of my favorite projects include rebuilding full-stack components of our Membership & Account platform, designing frontend features for our Voter Guide & Election Results during the 2024 Presidential Election and the LA Times–endorsed 2022 Midterm Election, and helping our Youth Media platform achieve WCAG 2.1 AA accessibility.
+              Over the past 4 years I've worked across React, TypeScript, Java, Spring Boot, Node, MongoDB, PostgreSQL, Docker, and GCP. I recently designed and built KQED's first internal AI product — a self-serve election results pipeline using the Claude API — and I lead developer-experience work across the team: an internal AI Maker Workshop series, a shared library of reusable AI skills, and our team's Postman standard. I've mentored three junior engineers and four interns.
             </p>
 
             <p>
-              I've also mentored four interns, teaching them how to think like engineers—not just write code.
-            </p>
-
-            <p>
-              Recently, I've been diving deeper into AI: building a smart note-taking app with summaries, a Chrome extension for quick web digestion, an AI job search agent, and the occasional browser mini-game. I also collaborate with people who want fast, modern websites without the hassle.
-            </p>
-
-            <p>
-              When I'm not writing code, I'm probably enjoying cozy Nintendo Switch games, checking out a Golden State Valkyries game, hiking with friends, experimenting with new tea latte recipes, or hanging out with my golden retriever—who believes he's my pair programmer.
+              Outside of work: Golden State Valkyries games, cozy Nintendo Switch games, hiking, tea latte experiments, and coding alongside my golden retriever who's convinced he's my pair programmer.
             </p>
           </motion.div>
 

@@ -176,18 +176,76 @@
 
 .hero-buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: $spacing-md;
   margin-bottom: $spacing-xl;
 
   @media (max-width: $breakpoint-md) {
-    gap: $spacing-lg;
     justify-content: center;
   }
 
   @media (max-width: $breakpoint-sm) {
     flex-direction: column;
-    align-items: center;
-    gap: $spacing-md;
+    align-items: stretch;
+    gap: $spacing-sm;
+  }
+
+  // Hero-specific button treatment — the shared .btn-* classes are tuned for
+  // light backgrounds elsewhere on the site, so they need higher-contrast,
+  // on-brand overrides here against the dark photo backdrop.
+  .btn-primary {
+    background: linear-gradient(135deg, $accent-blue 0%, $accent-blue-dark 100%) !important;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35) !important;
+
+    &:hover {
+      background: linear-gradient(135deg, $accent-blue-dark 0%, #1d4ed8 100%) !important;
+      box-shadow: 0 8px 28px rgba(59, 130, 246, 0.45) !important;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.45) !important;
+    }
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    color: white !important;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.18) !important;
+      border-color: rgba(255, 255, 255, 0.55) !important;
+      color: white !important;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3) !important;
+    }
+  }
+
+  .btn-outline {
+    background: transparent !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.12) !important;
+      border-color: white !important;
+      color: white !important;
+      box-shadow: none !important;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3) !important;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+      width: 100%;
+    }
   }
 }
 

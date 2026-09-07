@@ -1,21 +1,17 @@
 @use '../styles/variables.scss' as *;
 
 .nav-backdrop {
-  display: none;
-
-  @media (max-width: $breakpoint-md) {
-    display: block;
-    position: fixed;
-    inset: 70px 0 0 0;
-    z-index: $z-fixed - 1;
-    border: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    cursor: default;
-    background: rgba(15, 23, 42, 0.25);
-    animation: navBackdropIn 0.2s ease;
-  }
+  display: block;
+  position: fixed;
+  inset: 70px 0 0 0;
+  z-index: $z-fixed - 1;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  cursor: default;
+  background: rgba(15, 23, 42, 0.25);
+  animation: navBackdropIn 0.2s ease;
 }
 
 @keyframes navBackdropIn {
@@ -48,15 +44,14 @@
   }
 
   &--menu-open {
-    @media (max-width: $breakpoint-md) {
-      .nav-menu {
-        box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
-      }
+    .nav-menu {
+      box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
     }
   }
 }
 
 .nav-container {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 $spacing-lg;
@@ -87,59 +82,46 @@
 }
 
 .nav-menu {
+  position: absolute;
+  // aligns with the outer right edge of the nav-toggle button
+  right: $spacing-lg;
+  top: calc(100% + #{$spacing-sm});
+  width: min(260px, calc(100vw - #{$spacing-lg} * 2));
   display: flex;
-  align-items: center;
-  gap: 0.125rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: $spacing-sm;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  border: 1px solid $border-light;
+  border-radius: $radius-xl;
+  transform: translateY(-8px) scale(0.98);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform-origin: top right;
+  transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s;
 
-  @media (min-width: 769px) {
-    gap: 0.25rem;
-  }
-
-  @media (max-width: $breakpoint-md) {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 70px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: $spacing-md $spacing-lg $spacing-xl;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid $border-light;
-    transform: translateY(-100%);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: transform 0.25s ease, opacity 0.2s ease, visibility 0.2s;
-
-    &--open {
-      transform: translateY(0);
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
+  &--open {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 }
 
 .nav-link {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.5rem 0.75rem;
-  font-size: $font-size-sm;
+  justify-content: flex-start;
+  padding: $spacing-md $spacing-sm;
+  font-size: $font-size-base;
   font-weight: $font-weight-medium;
   color: $text-secondary;
   text-decoration: none;
-  border-radius: $radius-md;
+  border-radius: $radius-lg;
   transition: color $transition-fast, background $transition-fast;
-
-  @media (max-width: $breakpoint-md) {
-    justify-content: flex-start;
-    padding: $spacing-md $spacing-sm;
-    font-size: $font-size-base;
-    border-radius: $radius-lg;
-  }
 
   &:hover {
     color: $text-primary;
@@ -159,7 +141,7 @@
 }
 
 .nav-toggle {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
@@ -172,10 +154,6 @@
   cursor: pointer;
   color: $text-primary;
   transition: background $transition-fast;
-
-  @media (max-width: $breakpoint-md) {
-    display: flex;
-  }
 
   &:hover {
     background: rgba(15, 23, 42, 0.06);

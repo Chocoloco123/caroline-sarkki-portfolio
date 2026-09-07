@@ -8,7 +8,7 @@ import './Footer.scss'
 
 const Footer: React.FC = () => {
   const socialLinks = [
-    { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki-2a5517126/', icon: 'linkedin' },
+    { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/caroline-sarkki', icon: 'linkedin' },
     { platform: 'GitHub', url: 'https://github.com/Chocoloco123', icon: 'github' },
     { platform: 'Email', url: 'mailto:csarkki.swe@gmail.com', icon: 'envelope' }
   ]

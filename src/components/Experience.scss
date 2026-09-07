@@ -79,13 +79,15 @@
   }
 }
 
-.timeline-content-right {
-  margin-left: calc(50% + 40px);
-}
+@media (min-width: #{$breakpoint-md + 1px}) {
+  .timeline-content-right {
+    margin-left: calc(50% + 40px);
+  }
 
-.timeline-content-left {
-  margin-right: calc(50% + 40px);
-  margin-left: 0;
+  .timeline-content-left {
+    margin-right: calc(50% + 40px);
+    margin-left: 0;
+  }
 }
 
 .timeline-date {
@@ -93,6 +95,13 @@
   font-size: $font-size-sm;
   margin-bottom: $spacing-md;
   display: block;
+}
+
+.timeline-scope {
+  color: $text-muted;
+  font-size: $font-size-sm;
+  font-style: italic;
+  margin-bottom: $spacing-md;
 }
 
 .experience-list {

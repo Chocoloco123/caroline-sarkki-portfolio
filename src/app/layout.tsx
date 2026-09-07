@@ -121,7 +121,7 @@ export default function RootLayout({
               "url": "https://carolinesarkki.dev",
               "image": "https://carolinesarkki.dev/caroline-headshot.jpg",
               "sameAs": [
-                "https://www.linkedin.com/in/caroline-sarkki-2a5517126/",
+                "https://www.linkedin.com/in/caroline-sarkki",
                 "https://github.com/Chocoloco123"
               ],
               "worksFor": {

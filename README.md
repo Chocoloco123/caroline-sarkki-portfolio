@@ -232,7 +232,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Caroline Sarkki**
 - **Email**: csarkki.swe@gmail.com
-- **LinkedIn**: [Caroline Sarkki](https://www.linkedin.com/in/caroline-sarkki-2a5517126/)
+- **LinkedIn**: [Caroline Sarkki](https://www.linkedin.com/in/caroline-sarkki)
 - **GitHub**: [Chocoloco123](https://github.com/Chocoloco123)
 - **Location**: San Francisco Bay Area
 
