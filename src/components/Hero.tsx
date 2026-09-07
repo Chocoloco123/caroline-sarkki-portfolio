@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
           </h2>
 
           <p className="hero-description">
-            I build intuitive interfaces, solid backend systems, and sprinkle in AI features whenever they make life easier. I care a lot about clarity—both in the products I create and the code that powers them.
+            I build intuitive interfaces, solid backend systems, and the AI tooling that helps my team move faster. I care a lot about clarity—both in the products I create and the code that powers them.
           </p>
 
           <div
