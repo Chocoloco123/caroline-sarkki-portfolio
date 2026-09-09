@@ -14,6 +14,15 @@
   }
 }
 
+.projects-grid--featured {
+  grid-template-columns: minmax(0, 480px);
+  justify-content: center;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 #professional-projects-heading, #dx-projects-heading, #personal-projects-heading {
   margin-bottom: $spacing-md;
   margin-top: $spacing-xl;
@@ -46,6 +55,7 @@
 
 .project-image {
   height: 200px;
+  margin-bottom: $spacing-lg;
   display: flex;
   align-items: center;
   justify-content: center;

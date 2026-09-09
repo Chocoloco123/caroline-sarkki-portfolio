@@ -25,7 +25,7 @@ const About: React.FC = () => {
     { value: yearsOfExperience, label: 'Years Experience' },
     { value: '10+', label: 'Projects Completed' },
     { value: '4', label: 'Interns Mentored' },
-    { value: '100%', label: 'Passion for Code' }
+    { value: '10/15', label: 'Teammates Trained on AI' }
   ]
 
   return (

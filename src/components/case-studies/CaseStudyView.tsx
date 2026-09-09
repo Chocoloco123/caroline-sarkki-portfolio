@@ -30,7 +30,7 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ study }) => {
         </motion.div>
 
         <motion.header
-          className="case-study__hero"
+          className={`case-study__hero${study.screenshot ? '' : ' case-study__hero--no-visual'}`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: 'easeOut', delay: 0.05 }}
@@ -42,14 +42,16 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ study }) => {
             </h1>
             <p className="case-study__summary">{study.heroSummary}</p>
             <div className="case-study__hero-actions">
-              <a
-                href={study.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="case-study__btn case-study__btn--primary"
-              >
-                {study.liveCtaLabel}
-              </a>
+              {study.liveUrl && (
+                <a
+                  href={study.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="case-study__btn case-study__btn--primary"
+                >
+                  {study.liveCtaLabel}
+                </a>
+              )}
               {study.githubRepos?.map((repo) => (
                 <a
                   key={repo.url}
@@ -63,18 +65,20 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ study }) => {
               ))}
             </div>
           </div>
-          <div className="case-study__hero-visual">
-            <div className="case-study__shot">
-              <Image
-                src={study.screenshot}
-                alt={study.screenshotAlt}
-                fill
-                className="case-study__shot-img"
-                sizes="(max-width: 1024px) 100vw, 520px"
-                priority
-              />
+          {study.screenshot && (
+            <div className="case-study__hero-visual">
+              <div className="case-study__shot">
+                <Image
+                  src={study.screenshot}
+                  alt={study.screenshotAlt ?? ''}
+                  fill
+                  className="case-study__shot-img"
+                  sizes="(max-width: 1024px) 100vw, 520px"
+                  priority
+                />
+              </div>
             </div>
-          </div>
+          )}
         </motion.header>
 
         <motion.article
@@ -124,14 +128,16 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ study }) => {
 
           <footer className="case-study__footer-cta">
             <div className="case-study__footer-actions">
-              <a
-                href={study.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="case-study__btn case-study__btn--primary"
-              >
-                {study.liveCtaLabel}
-              </a>
+              {study.liveUrl && (
+                <a
+                  href={study.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="case-study__btn case-study__btn--primary"
+                >
+                  {study.liveCtaLabel}
+                </a>
+              )}
               {study.githubRepos?.map((repo) => (
                 <a
                   key={repo.url}
@@ -144,7 +150,9 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ study }) => {
                 </a>
               ))}
             </div>
-            <p className="case-study__footer-note">External links open in a new tab</p>
+            {(study.liveUrl || study.githubRepos?.length) && (
+              <p className="case-study__footer-note">External links open in a new tab</p>
+            )}
           </footer>
         </motion.article>
       </div>

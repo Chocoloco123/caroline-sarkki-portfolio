@@ -24,10 +24,12 @@ export interface CaseStudy {
   metaDescription: string
   /** Short line under the title in the hero */
   heroSummary: string
-  screenshot: string
-  screenshotAlt: string
-  liveUrl: string
-  liveCtaLabel: string
+  /** Omit for a project with no shareable screenshot (e.g. an internal tool) */
+  screenshot?: string
+  screenshotAlt?: string
+  /** Omit for a project with no public URL (e.g. an internal tool) */
+  liveUrl?: string
+  liveCtaLabel?: string
   /** Optional public repos (e.g. frontend + API) shown next to the live app link */
   githubRepos?: Array<{ label: string; url: string }>
   blocks: CaseStudyBlock[]
@@ -286,10 +288,133 @@ const crittr: CaseStudy = {
   ],
 }
 
-export const caseStudies: CaseStudy[] = [crittr, bauwauHaus]
+const kqedElectionResults: CaseStudy = {
+  slug: 'kqed-election-results-pipeline',
+  title: 'KQED Election Results AI Pipeline',
+  tag: 'Internal tool',
+  metaDescription:
+    "KQED's first internal AI product: a self-serve election results pipeline built with React, Node.js, the Claude API, and Google Sheets API.",
+  heroSummary:
+    'A self-serve tool that turns raw county election results into sheet-ready data in minutes, replacing a manual process that took a dozen people to run.',
+  blocks: [
+    {
+      id: 'overview',
+      heading: 'Overview',
+      paragraphs: [
+        "Designed and built KQED's first internal AI product: a self-serve election results pipeline used by the newsroom's data team during live election periods.",
+        'The tool lets a data lead select a county and either upload a results file or trigger an automated scrape; the Claude API then standardizes whatever comes back into sheet-ready data written to Google Sheets. Built solo, frontend to backend, using Claude Code and Cursor.',
+      ],
+    },
+    {
+      id: 'problem',
+      heading: 'Problem',
+      paragraphs: [
+        "KQED's election results reporting relied on a manual process: during election periods, about a dozen people were needed to enter county-by-county results by hand, repeatedly, over a month-plus results window.",
+        'That process was slow, labor-intensive, and hard to scale for high-turnout elections, with no standardized way to handle the wide variety of formats county results come in.',
+      ],
+      listTitle: 'Key challenges included:',
+      listItems: [
+        'County results arrive in inconsistent formats, from PDFs to ad-hoc spreadsheets to raw scraped HTML',
+        'The manual process required a large, coordinated team working in parallel under time pressure',
+        'Any automation still needed a human QA step — accuracy on live election data is non-negotiable',
+        'The tool had to be usable by a non-engineer (a data lead), not just by developers',
+      ],
+    },
+    {
+      id: 'goals',
+      heading: 'Goals',
+      paragraphs: ['The project focused on a few concrete outcomes:'],
+      listItems: [
+        'Let a single data lead run the pipeline directly, without engineering involvement',
+        'Support both an uploaded results file and an automated scrape as input paths',
+        'Standardize inconsistent county data into a single sheet-ready format automatically',
+        'Shrink the team needed to cover a results period from about a dozen people to a much smaller one, while keeping human QA in the loop',
+      ],
+    },
+    {
+      id: 'approach',
+      heading: 'Approach',
+      paragraphs: [
+        'The pipeline is built around a simple, guided flow: pick a county, then either upload a results file or trigger a scrape for that county. Whatever comes back is passed to the Claude API, which standardizes the data into a consistent, sheet-ready shape before it lands in Google Sheets.',
+        'Keeping the human QA step meant treating the AI as a standardization layer, not a black box — the data lead still reviews what comes out before it is used in reporting.',
+      ],
+      listTitle: 'Key decisions included:',
+      listItems: [
+        'A React frontend so the data lead could drive the whole flow without touching code',
+        'A Node.js backend to handle uploads, scraping, and orchestration between Claude and Google Sheets',
+        'Using the Claude API specifically for the standardization step, where source formats vary the most',
+        'Writing output directly to Google Sheets via the Google Sheets API, matching the format the newsroom already worked in',
+        'Retaining a human QA review step rather than fully automating trust-critical output',
+      ],
+    },
+    {
+      id: 'implementation',
+      heading: 'Implementation',
+      paragraphs: [
+        'Built and shipped solo, end to end: the React county-selection and upload/scrape UI, the Node.js orchestration layer, the Claude API integration for data standardization, and the Google Sheets API output step.',
+        'Development leaned heavily on Claude Code and Cursor for implementation speed, given the tight timeline ahead of a live election period.',
+        'Before trusting it with real results, the standardization step was exercised at least a dozen times against each of the different county file formats — and far more than that during earlier testing — to surface edge cases ahead of election night.',
+      ],
+      listTitle: 'Highlights:',
+      listItems: [
+        'County selection with two input paths: file upload or automated scrape',
+        'Claude API step that normalizes inconsistent county formats into one sheet-ready structure',
+        'Direct write-out to Google Sheets, matching the newsroom\'s existing workflow',
+        'Human QA review retained as a deliberate step before results are used in reporting',
+      ],
+    },
+    {
+      id: 'challenges',
+      heading: 'Challenges & tradeoffs',
+      paragraphs: [
+        'Shipping the first version against a real election cycle raised the stakes: there was no room for silent data errors, and no time to iterate slowly.',
+      ],
+      listItems: [
+        'Validating the tool against live election data during the June 2026 midterms, where correctness mattered immediately',
+        'Balancing automation with accuracy — keeping a human QA step rather than fully trusting AI-standardized output',
+        'Handling the genuine variability in how counties publish results, without a fixed schema to rely on',
+        'Building and shipping solo under election-cycle time pressure, with no team to split the work across',
+        'Mitigated the "no room for silent errors" risk with heavy pre-launch testing rather than shipping on faith',
+      ],
+    },
+    {
+      id: 'outcome',
+      heading: 'Outcome',
+      paragraphs: [
+        'The pipeline replaced a manual process that required about a dozen people entering county results by hand with a self-serve tool run by a much smaller team, repeatedly, over the month-plus results period — while keeping human QA review in place.',
+        'On election night itself, it ran at least four full passes across all 15 counties in the June 2026 midterms. Where a county previously took an estimated 20 minutes to process by hand, the self-serve flow brings that down to roughly 2.',
+        "It was validated against live election data during the June 2026 midterms, and is on track to connect to KQED's public election results site for full production in November 2026.",
+      ],
+    },
+    {
+      id: 'role',
+      heading: 'My role',
+      paragraphs: [
+        'Sole designer and builder of the entire pipeline: the frontend UI, the backend orchestration, the Claude API integration, and the Google Sheets output — plus working with the data team to fit the tool into their existing QA workflow.',
+      ],
+    },
+    {
+      id: 'next',
+      heading: 'What I would improve next',
+      paragraphs: ['Ahead of full production in November 2026, I would prioritize:'],
+      listItems: [
+        'Expanding scrape coverage to more counties and result formats',
+        'Adding automated anomaly checks ahead of the human QA step, to flag likely errors earlier',
+        'Formal onboarding so other data leads can run the pipeline independently',
+        'Connecting the pipeline directly to KQED\'s public election results site for full production',
+      ],
+    },
+  ],
+}
 
-/** Order of cards on `/case-studies` (Crittr first, then The BauWau Haus, then any others). */
-const CASE_STUDIES_HUB_ORDER: string[] = ['crittr', 'bauwau-haus']
+export const caseStudies: CaseStudy[] = [crittr, bauwauHaus, kqedElectionResults]
+
+/** Order of cards on `/case-studies` (strongest/most recent story first). */
+const CASE_STUDIES_HUB_ORDER: string[] = [
+  'kqed-election-results-pipeline',
+  'crittr',
+  'bauwau-haus',
+]
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
   return caseStudies.find((c) => c.slug === slug)

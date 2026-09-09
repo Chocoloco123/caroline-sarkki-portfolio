@@ -34,15 +34,17 @@ export default function CaseStudiesIndexPage() {
                 href={`/case-studies/${study.slug}`}
                 className="case-studies-hub__card"
               >
-                <div className="case-studies-hub__card-image">
-                  <Image
-                    src={study.screenshot}
-                    alt={study.screenshotAlt}
-                    fill
-                    className="case-studies-hub__card-img"
-                    sizes="(max-width: 768px) 100vw, 400px"
-                  />
-                </div>
+                {study.screenshot && (
+                  <div className="case-studies-hub__card-image">
+                    <Image
+                      src={study.screenshot}
+                      alt={study.screenshotAlt ?? ''}
+                      fill
+                      className="case-studies-hub__card-img"
+                      sizes="(max-width: 768px) 100vw, 400px"
+                    />
+                  </div>
+                )}
                 <div className="case-studies-hub__card-body">
                   <span className="case-studies-hub__card-tag">{study.tag}</span>
                   <h2 className="case-studies-hub__card-title">{study.title}</h2>

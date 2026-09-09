@@ -15,15 +15,17 @@ const Projects: React.FC = () => {
   const handleImageError = (projectId: string) => {
     setImageErrors(prev => new Set(prev).add(projectId))
   }
+  const featuredProject: Project = {
+    id: 'election-results-ai-pipeline',
+    title: 'KQED Election Results AI Pipeline',
+    tag: 'Featured',
+    description: "Designed and built KQED's first internal AI product: a self-serve tool where a data lead selects a county and either uploads a results file or triggers an automated scrape, with the Claude API standardizing the output into sheet-ready data. Validated against live election data during the June 2026 midterms; connecting to KQED's public election results site for full production in November 2026. Replaced a manual process that required about a dozen people entering county results by hand with a self-serve tool run by a much smaller team, repeatedly over the month-plus results period, while retaining human QA review. Built solo using Claude Code and Cursor.",
+    technologies: ['React', 'Node.js', 'Claude API', 'Google Sheets API'],
+    icon: 'vote-yea',
+    caseStudyPath: '/case-studies/kqed-election-results-pipeline'
+  }
+
   const professionalProjects: Project[] = [
-    {
-      id: 'election-results-ai-pipeline',
-      title: 'KQED Election Results AI Pipeline',
-      tag: 'Featured',
-      description: "Designed and built KQED's first internal AI product: a self-serve tool where a data lead selects a county and either uploads a results file or triggers an automated scrape, with the Claude API standardizing the output into sheet-ready data. Validated against live election data during the June 2026 midterms; connecting to KQED's public election results site for full production in November 2026. Replaced a manual process that required about a dozen people entering county results by hand with a self-serve tool run by a much smaller team, repeatedly over the month-plus results period, while retaining human QA review. Built solo using Claude Code and Cursor.",
-      technologies: ['React', 'Node.js', 'Claude API', 'Google Sheets API'],
-      icon: 'vote-yea'
-    },
     {
       id: 'voter-guide',
       title: 'KQED Voter Guide',
@@ -66,21 +68,21 @@ const Projects: React.FC = () => {
     {
       id: 'ai-maker-workshop',
       title: 'AI Maker Workshop Series',
-      description: 'Created and taught an internal workshop series introducing practical applications of AI/LLM tooling and prompt engineering, attended by 10 of the 15 people on the product team, engineers and non-engineers alike.',
+      description: 'Created and taught a 6-session internal workshop series (over six weeks) on practical AI/LLM tooling and prompt engineering, attended by 10 of the 15 people on the product team, engineers and non-engineers alike. Every attendee graduated by shipping their own portfolio site with an AI chatbot, and at least a PM and three engineers have carried what they learned into their day-to-day work since.',
       technologies: ['Internal Training', 'AI/LLM Tooling', 'Prompt Engineering'],
       icon: 'comments'
     },
     {
       id: 'shared-ai-skills',
       title: 'Shared AI Skills Repository',
-      description: 'Built and maintain an internal library of reusable AI skills — including tools for engineering documentation, Jira ticket formatting, and document summarization — open to the full team, including non-engineers.',
+      description: 'Built and maintain an internal library of 3 reusable AI skills — covering engineering documentation, Jira ticket formatting, and document summarization — open to the full team, including non-engineers.',
       technologies: ['Claude API', 'Internal Tooling'],
       icon: 'brain'
     },
     {
       id: 'postman-standard',
       title: 'Postman Standard',
-      description: "Established the team's Postman standard: wrote the documentation, maintain a canonical forkable collection pattern, and configured role-based access permissions for every engineer and contractor.",
+      description: "Established the team's Postman standard: wrote the documentation, maintain a canonical forkable collection pattern, and configured role-based access permissions across the team's 13-15 engineers and contractors.",
       technologies: ['API Design', 'Documentation', 'Access Control'],
       icon: 'bars'
     }
@@ -178,7 +180,7 @@ const Projects: React.FC = () => {
           aria-labelledby={`project-title-${project.id}`}
         >
           <CardHeader className="text-center px-8 pb-4">
-          <div className={`project-image mx-auto mb-6 ${shouldShowImage ? 'project-image-screenshot' : 'project-image-icon'}`} aria-hidden="true">
+          <div className={`project-image ${shouldShowImage ? 'project-image-screenshot' : 'project-image-icon'}`} aria-hidden="true">
             {shouldShowImage ? (
               <img
                 src={project.screenshot}
@@ -277,17 +279,34 @@ const Projects: React.FC = () => {
               </div>
             ) : null
           ) : (
-            liveUrl && (
-              <a
-                href={liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-link inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
-                aria-label={`View ${project.title} project (opens in new tab)`}
-                aria-describedby={`project-desc-${project.id}`}
+            (liveUrl || project.caseStudyPath) && (
+              <div
+                className="project-card-links text-slate-700"
+                role="group"
+                aria-label={`${project.title} project links`}
               >
-                View Project <i className="fas fa-external-link-alt" aria-hidden="true"></i>
-              </a>
+                {liveUrl && (
+                  <a
+                    href={liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
+                    aria-label={`View ${project.title} project (opens in new tab)`}
+                    aria-describedby={`project-desc-${project.id}`}
+                  >
+                    View Project <i className="fas fa-external-link-alt text-xs" aria-hidden="true" />
+                  </a>
+                )}
+                {project.caseStudyPath && (
+                  <Link
+                    href={project.caseStudyPath}
+                    className="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded-md px-2 py-1"
+                    aria-label={`${project.title} case study`}
+                  >
+                    Case study
+                  </Link>
+                )}
+              </div>
             )
           )}
         </CardContent>
@@ -310,26 +329,19 @@ const Projects: React.FC = () => {
           Featured Projects
         </motion.h2>
 
-        {/* Professional Projects */}
+        {/* Featured Project */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
         >
-          <h3
-            id="professional-projects-heading"
-            className="text-2xl mb-20 text-center"
-          >
-            Professional Work at KQED
-          </h3>
           <div
-            className="projects-grid mb-16"
+            className="projects-grid projects-grid--featured mb-16"
             role="grid"
-            aria-labelledby="professional-projects-heading"
-            aria-label="Professional projects grid"
+            aria-label="Featured project"
           >
-            {professionalProjects.map((project, index) => renderProjectCard(project, index))}
+            {renderProjectCard(featuredProject, 0)}
           </div>
         </motion.div>
 
@@ -337,7 +349,7 @@ const Projects: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
           <h3
@@ -353,6 +365,29 @@ const Projects: React.FC = () => {
             aria-label="Developer experience and enablement projects grid"
           >
             {dxProjects.map((project, index) => renderProjectCard(project, index))}
+          </div>
+        </motion.div>
+
+        {/* Professional Projects */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          <h3
+            id="professional-projects-heading"
+            className="text-2xl mb-20 text-center"
+          >
+            Professional Work at KQED
+          </h3>
+          <div
+            className="projects-grid mb-16"
+            role="grid"
+            aria-labelledby="professional-projects-heading"
+            aria-label="Professional projects grid"
+          >
+            {professionalProjects.map((project, index) => renderProjectCard(project, index))}
           </div>
         </motion.div>
 

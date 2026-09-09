@@ -16,6 +16,7 @@ const navItems: Array<SectionNav | RouteNav | ExternalNav> = [
   { type: 'section', hash: '#about', label: 'About' },
   { type: 'section', hash: '#experience', label: 'Experience' },
   { type: 'section', hash: '#projects', label: 'Projects' },
+  { type: 'section', hash: '#skills', label: 'Skills' },
   { type: 'route', path: '/case-studies', label: 'Case studies', matchPrefix: true },
   { type: 'external', href: '/resume/Caroline_Sarkki_Resume.pdf', label: 'Resume' },
   { type: 'section', hash: '#contact', label: 'Contact' },
